@@ -27223,7 +27223,7 @@
 	
 	var postTumblrData = function postTumblrData(postedData) {
 	    return function (dispatch) {
-	        var url = 'https://node-movie-kkindorf.c9users.io/saved-cards';
+	        var url = '/saved-cards';
 	        fetch(url, {
 	            method: 'post',
 	            headers: { 'content-type': 'application/json' },
