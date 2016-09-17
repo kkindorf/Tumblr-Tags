@@ -1,0 +1,18 @@
+.page-header{
+    position: relative;
+    text-align: center;
+    display: inline;
+    
+}
+.col-xs-12{
+    padding-right: 10%;
+    padding-left: 10%;
+    padding-bottom: 5%;
+}
+.card{
+    width: 65%;
+    margin: 0 auto;
+}
+.card-block{
+    display: inline;
+}
