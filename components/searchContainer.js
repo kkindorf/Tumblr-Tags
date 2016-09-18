@@ -6,7 +6,7 @@ var tumblrResults = [];
 
 var SearchContainer = React.createClass({
     componentDidMount: function(){
-        this.props.dispatch(actions.fetchTumblrData('Bill Murray'))
+        this.props.dispatch(actions.fetchTumblrData('Justin Bieber gifs'))
     },
     onSubmit: function(e){
         e.preventDefault();
@@ -17,16 +17,19 @@ var SearchContainer = React.createClass({
     },
     render: function(){
         tumblrResults = this.props.tumblrDataResponse.map(function(item, id){
-            //returns defined outside of loop
-            var defaultImage = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
-            return (
+            if(!item.photos){
+                return;
+            }else{
+                return (
               <SearchCard blogName = {item.blog_name}
-                            src = {item.photos ? item.photos[0].alt_sizes[1].url: defaultImage }  
+                            src = {item.photos[0].alt_sizes[1].url}  
                             summary = {item.summary}
                             timeStamp = {item.timestamp}
                             
                                                         />
-            )
+                )
+            }
+            
         })
         return(
             <div>

@@ -29588,7 +29588,7 @@
 	    displayName: 'SearchContainer',
 	
 	    componentDidMount: function componentDidMount() {
-	        this.props.dispatch(actions.fetchTumblrData('Bill Murray'));
+	        this.props.dispatch(actions.fetchTumblrData('Justin Bieber gifs'));
 	    },
 	    onSubmit: function onSubmit(e) {
 	        e.preventDefault();
@@ -29599,14 +29599,16 @@
 	    },
 	    render: function render() {
 	        tumblrResults = this.props.tumblrDataResponse.map(function (item, id) {
-	            //returns defined outside of loop
-	            var defaultImage = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
-	            return React.createElement(SearchCard, { blogName: item.blog_name,
-	                src: item.photos ? item.photos[0].alt_sizes[1].url : defaultImage,
-	                summary: item.summary,
-	                timeStamp: item.timestamp
+	            if (!item.photos) {
+	                return;
+	            } else {
+	                return React.createElement(SearchCard, { blogName: item.blog_name,
+	                    src: item.photos[0].alt_sizes[1].url,
+	                    summary: item.summary,
+	                    timeStamp: item.timestamp
 	
-	            });
+	                });
+	            }
 	        });
 	        return React.createElement(
 	            'div',
