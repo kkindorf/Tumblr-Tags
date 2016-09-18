@@ -2,14 +2,20 @@ var React = require('react');
 var SearchCard = require('./searchCard');
 var actions = require('../actions');
 var connect = require('react-redux').connect;
-var tumblrResults;
+var tumblrResults = [];
 
 var SearchContainer = React.createClass({
-    
+    componentDidMount: function(){
+        this.props.dispatch(actions.fetchTumblrData('Bill Murray'))
+    },
     onSubmit: function(e){
         e.preventDefault();
         var query = this.refs.input.value;
+        console.log(query)
         this.props.dispatch(actions.fetchTumblrData(query))
+       this.refs.input.value ='';
+    },
+    render: function(){
         tumblrResults = this.props.tumblrDataResponse.map(function(item, id){
             //returns defined outside of loop
             var defaultImage = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
@@ -22,11 +28,6 @@ var SearchContainer = React.createClass({
                                                         />
             )
         })
-       
-    },
-    render: function(){
-         console.log('from line 57', this.props.tumblrDataResponse)
-           
         return(
             <div>
                
@@ -36,7 +37,6 @@ var SearchContainer = React.createClass({
                     </form>
                 </div>
                 <div>
-                
                 {tumblrResults}
               </div>
             </div>    

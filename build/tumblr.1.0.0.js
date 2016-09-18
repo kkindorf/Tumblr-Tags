@@ -29582,16 +29582,22 @@
 	var SearchCard = __webpack_require__(271);
 	var actions = __webpack_require__(236);
 	var connect = __webpack_require__(239).connect;
-	var tumblrResults;
+	var tumblrResults = [];
 	
 	var SearchContainer = React.createClass({
 	    displayName: 'SearchContainer',
 	
-	
+	    componentDidMount: function componentDidMount() {
+	        this.props.dispatch(actions.fetchTumblrData('Bill Murray'));
+	    },
 	    onSubmit: function onSubmit(e) {
 	        e.preventDefault();
 	        var query = this.refs.input.value;
+	        console.log(query);
 	        this.props.dispatch(actions.fetchTumblrData(query));
+	        this.refs.input.value = '';
+	    },
+	    render: function render() {
 	        tumblrResults = this.props.tumblrDataResponse.map(function (item, id) {
 	            //returns defined outside of loop
 	            var defaultImage = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
@@ -29602,10 +29608,6 @@
 	
 	            });
 	        });
-	    },
-	    render: function render() {
-	        console.log('from line 57', this.props.tumblrDataResponse);
-	
 	        return React.createElement(
 	            'div',
 	            null,
