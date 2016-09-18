@@ -2,8 +2,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var config = require('./config');
-var http = require('http');
-
 var app = express();
 app.use(bodyParser.json());
 app.use(express.static('build'));
@@ -38,7 +36,9 @@ app.get('/hello', function(req,res){
     return res.json({message: 'Hello world!'})
 })
 app.get('/saved-cards', function(req, res){
+    
     SaveCard.find(function(err, savedCards){
+        
         if(err){
             return res.json({
                 message: 'There was a problem returning your cards'
@@ -64,12 +64,24 @@ app.post('/saved-cards', function(req, res){
     });
 });
 
+app.delete('/saved-cards/:id', function(req, res){
+    var id = req.params.id;
+    console.log(id);
+    SaveCard.findByIdAndRemove(id, function(error){
+        if(error){
+            return res.status(400).json({
+                message: 'You did not select a valid id'
+            })
+        }
+        res.status(200).json(id)
+    })
+})
 
 //app.us here is catching all of th endpoints if none of the endpoints were hit on a request 
 //made by the user
 app.use('*', function(request, response){
     response.status(404).json({
-        message: 'Not Found'
+        message: 'Endpoint Not Found'
     });
 });
 

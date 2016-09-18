@@ -27195,14 +27195,45 @@
 	var postTumblrError = function postTumblrError(postedData, error) {
 	    return {
 	        type: POST_TUMBLR_ERROR,
-	        savedTumblrData: postedData,
+	        postedData: postedData,
 	        error: error
 	    };
 	};
 	
+	var FETCH_POSTS_FROM_DB_SUCCESS = 'FETCH_POSTS_FROM_DB_SUCCESS';
+	var fetchPostsFromDbSuccess = function fetchPostsFromDbSuccess(dbData) {
+	    return {
+	        type: FETCH_POSTS_FROM_DB_SUCCESS,
+	        dbData: dbData
+	
+	    };
+	};
+	
+	var FETCH_POSTS_FROM_DB_ERROR = 'FETCH_POSTS_FROM_DB_ERROR';
+	var fetchPostsFromDbError = function fetchPostsFromDbError(error) {
+	    return {
+	        type: FETCH_POSTS_FROM_DB_ERROR,
+	        error: error
+	    };
+	};
+	
+	var DELETE_CARD_FROM_DB_SUCCESS = 'DELETE_CARD_FROM_DB_SUCCESS';
+	var deleteCardFromDbSuccess = function deleteCardFromDbSuccess(id) {
+	    return {
+	        type: DELETE_CARD_FROM_DB_SUCCESS,
+	        id: id
+	    };
+	};
+	
+	var DELETE_CARD_FROM_DB_ERROR = 'DELETE_CARD_FROM_DB_ERROR';
+	var deleteCardFromDbError = function deleteCardFromDbError(error) {
+	    type: DELETE_CARD_FROM_DB_ERROR;
+	    error: error;
+	};
 	var fetchTumblrData = function fetchTumblrData(query) {
 	    return function (dispatch) {
 	        var url = 'https://crossorigin.me/http://api.tumblr.com/v2/tagged?tag=' + query + '&limit=300&api_key=F2iyRm0Ffc73oZncziOzs4SRvswAbAMQG4VS2ErSAHEtSB3JRz';
+	        /*var url = 'https://tumblr-api-kkindorf.c9users.io/status';*/
 	        return fetch(url).then(function (response) {
 	            if (response.state < 200 || response.status >= 300) {
 	                var error = new Error(response.statusText);
@@ -27227,6 +27258,7 @@
 	        fetch(url, {
 	            method: 'post',
 	            headers: { 'content-type': 'application/json' },
+	            //I don't need a body?
 	            body: JSON.stringify({ postedData: postedData })
 	        }).then(function (res) {
 	            console.log('logging response inside fetch post', res);
@@ -27237,6 +27269,55 @@
 	        });
 	    };
 	};
+	
+	var fetchDbData = function fetchDbData(dbData) {
+	    return function (dispatch) {
+	        var url = '/saved-cards';
+	        return fetch(url).then(function (response) {
+	            if (response.state < 200 || response.status >= 300) {
+	                var error = new Error(response.statusText);
+	                error.response = response;
+	                throw error;
+	            }
+	            return response.json();
+	        }).then(function (dbData) {
+	            return dispatch(fetchPostsFromDbSuccess(dbData));
+	        }).catch(function (error) {
+	            return dispatch(fetchPostsFromDbError(error));
+	        });
+	    };
+	};
+	
+	var deleteDbData = function deleteDbData(id) {
+	    return function (dispatch) {
+	        var url = '/saved-cards/' + id;
+	        fetch(url, {
+	            method: 'delete',
+	            headers: { 'content-type': 'application/json' }
+	        }).then(function (response) {
+	            if (response.state < 200 || response.status >= 300) {
+	                var error = new Error(response.statusText);
+	                error.response = response;
+	                throw error;
+	            }
+	            return response.json();
+	        }).then(function (id) {
+	            console.log('from line 144 in delete fetch', id);
+	            return dispatch(deleteCardFromDbSuccess(id));
+	        }).catch(function (error) {
+	            return dispatch(deleteCardFromDbError(error));
+	        });
+	    };
+	};
+	
+	exports.deleteDbData = deleteDbData;
+	exports.DELETE_CARD_FROM_DB_SUCCESS = DELETE_CARD_FROM_DB_SUCCESS;
+	exports.DELETE_CARD_FROM_DB_ERROR = DELETE_CARD_FROM_DB_ERROR;
+	exports.fetchDbData = fetchDbData;
+	exports.fetchPostsFromDbError = fetchPostsFromDbError;
+	exports.fetchPostsFromDbSuccess = fetchPostsFromDbSuccess;
+	exports.FETCH_POSTS_FROM_DB_ERROR = FETCH_POSTS_FROM_DB_ERROR;
+	exports.FETCH_POSTS_FROM_DB_SUCCESS = FETCH_POSTS_FROM_DB_SUCCESS;
 	exports.postTumblrData = postTumblrData;
 	exports.postTumblrSuccess = postTumblrSuccess;
 	exports.postTumblrError = postTumblrError;
@@ -29483,26 +29564,25 @@
 	var router = __webpack_require__(173);
 	var Router = router.Router;
 	var Route = router.Route;
+	var actions = __webpack_require__(236);
+	var connect = __webpack_require__(239).connect;
 	var Link = router.Link;
-	var SEARCH = [{
-	    id: 0,
-	    blogName: "movie 8",
-	    src: "https://s.graphiq.com/sites/default/files/stories/t2/tiny_cat_12573_8950.jpg",
-	    timestamp: "2006",
-	    summary: "This is a description"
-	}, {
-	    id: 1,
-	    blogName: "movie 9",
-	    src: "https://s-media-cache-ak0.pinimg.com/236x/f0/26/05/f0260599e1251c67eefca31c02a19a81.jpg",
-	    timestamp: "2010",
-	    summary: "Anothe description"
-	}];
+	var dbResults = [];
+	var itemId = '';
 	var SaveContainer = React.createClass({
 	    displayName: 'SaveContainer',
 	
-	
 	    render: function render() {
-	
+	        this.props.dispatch(actions.fetchDbData(this.props.dbData));
+	        dbResults = this.props.dbData.map(function (item, id) {
+	            itemId = item._id;
+	            //console.log('from line 17 in save container', itemId)
+	            return React.createElement(SaveCard, { blogName: item.blogName,
+	                src: item.src,
+	                summary: item.summary,
+	                timeStamp: item.timeStamp,
+	                id: itemId });
+	        });
 	        return React.createElement(
 	            'div',
 	            null,
@@ -29514,63 +29594,86 @@
 	                    { className: 'btn btn-default', role: 'button' },
 	                    'Previous Search'
 	                )
-	            )
+	            ),
+	            dbResults
 	        );
 	    }
 	});
-	module.exports = SaveContainer;
+	
+	var mapStateToProps = function mapStateToProps(state, props) {
+	    return {
+	        dbData: state.dbData
+	    };
+	};
+	var Container = connect(mapStateToProps)(SaveContainer);
+	module.exports = Container;
 
 /***/ },
 /* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(1);
+	var actions = __webpack_require__(236);
+	var connect = __webpack_require__(239).connect;
+	
 	var SaveCard = React.createClass({
-	    displayName: "SaveCard",
+	    displayName: 'SaveCard',
+	
 	
 	    deleted: function deleted() {
-	        console.log("I've been deleted!");
+	        console.log('from line 8 in save card', this.props.id);
+	        console.log('deleted has been clicked!');
+	        this.props.dispatch(actions.deleteDbData(this.props.id));
 	    },
 	    render: function render() {
 	        return React.createElement(
-	            "div",
-	            { className: "card" },
-	            React.createElement("img", { className: "card-img-top", src: this.props.src, alt: "Card image cap" }),
+	            'div',
+	            { className: 'card' },
+	            React.createElement('img', { className: 'card-img-top', src: this.props.src, alt: 'Card image cap' }),
 	            React.createElement(
-	                "div",
-	                { className: "card-block" },
+	                'div',
+	                { className: 'card-block' },
 	                React.createElement(
-	                    "h4",
-	                    { className: "card-title" },
-	                    this.props.blogName
+	                    'h4',
+	                    { className: 'card-title' },
+	                    this.props.blogName,
+	                    ' '
 	                ),
 	                React.createElement(
-	                    "p",
-	                    { className: "card-text" },
+	                    'p',
+	                    { className: 'card-text' },
 	                    this.props.summary
 	                ),
 	                React.createElement(
-	                    "p",
-	                    { className: "card-text" },
+	                    'p',
+	                    { className: 'card-text' },
 	                    React.createElement(
-	                        "small",
-	                        { className: "text-muted" },
-	                        "Posted: ",
+	                        'small',
+	                        { className: 'text-muted' },
+	                        'Posted: ',
 	                        this.props.timestamp
 	                    )
 	                ),
 	                React.createElement(
-	                    "button",
-	                    { className: "btn btn-default", type: "button", onClick: this.deleted },
-	                    "Button"
+	                    'p',
+	                    { className: 'display-none' },
+	                    this.props.id
+	                ),
+	                React.createElement(
+	                    'button',
+	                    { className: 'btn btn-default', type: 'button', onClick: this.deleted },
+	                    'Delete Me!'
 	                )
 	            )
 	        );
 	    }
 	});
-	module.exports = SaveCard;
+	
+	var Container = connect()(SaveCard);
+	module.exports = Container;
+	//module.exports = SaveCard;
 
 /***/ },
 /* 270 */
@@ -29763,7 +29866,8 @@
 	
 	var initialAppState = {
 	     tumblrDataResponse: [],
-	     postedData: {}
+	     postedData: {},
+	     dbData: []
 	
 	};
 	
@@ -29782,6 +29886,23 @@
 	          console.log('from line 21 in reducer', action.postedData);
 	          var updatedPostedData = Object.assign({}, state, { postedData: action.postedData });
 	          return updatedPostedData;
+	     }
+	     if (action.type === actions.POST_TUMBLR_ERROR) {
+	          console.log('from line 27 in reducer', action.error);
+	          throw new Error('the data from the database could not be posted', action.error);
+	     }
+	     if (action.type === actions.FETCH_POSTS_FROM_DB_SUCCESS) {
+	          //console.log('hello?')
+	          //console.log('from line 31 in reducer', action.dbData);
+	          var updatedDbData = Object.assign({}, state, { dbData: action.dbData });
+	          return updatedDbData;
+	     }
+	     if (action.type === actions.FETCH_POSTS_FROM_DB_ERROR) {
+	          console.log(action.error);
+	          throw new Error('the data could not be retrieved from the database', action.error);
+	     }
+	     if (action.type === actions.DELETE_CARD_FROM_DB_SUCCESS) {
+	          console.log('card has been deleted');
 	     }
 	
 	     return state;

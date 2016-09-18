@@ -21,7 +21,7 @@ var SearchContainer = React.createClass({
                 return;
             }else{
                 return (
-              <SearchCard blogName = {item.blog_name}
+                    <SearchCard blogName = {item.blog_name}
                             src = {item.photos[0].alt_sizes[1].url}  
                             summary = {item.summary}
                             timeStamp = {item.timestamp}

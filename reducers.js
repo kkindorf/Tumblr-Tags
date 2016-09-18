@@ -2,7 +2,8 @@ var actions = require('./actions');
 
 var initialAppState = {
 	tumblrDataResponse: [],
-	postedData: {}
+	postedData: {},
+	dbData: []
     
 }
 
@@ -21,6 +22,23 @@ var appReducer = function(state, action){
           console.log('from line 21 in reducer', action.postedData);
           var updatedPostedData = Object.assign({}, state, {postedData: action.postedData})
           return updatedPostedData;
+     }
+     if(action.type === actions.POST_TUMBLR_ERROR){
+          console.log('from line 27 in reducer', action.error);
+          throw new Error('the data from the database could not be posted', action.error)
+     }
+     if(action.type === actions.FETCH_POSTS_FROM_DB_SUCCESS){
+          //console.log('hello?')
+          //console.log('from line 31 in reducer', action.dbData);
+          var updatedDbData = Object.assign({}, state, {dbData: action.dbData});
+          return updatedDbData;
+     }
+     if(action.type === actions.FETCH_POSTS_FROM_DB_ERROR){
+          console.log(action.error);
+          throw new Error('the data could not be retrieved from the database', action.error)
+     }
+     if(action.type === actions.DELETE_CARD_FROM_DB_SUCCESS){
+         console.log('card has been deleted')
      }
      
      return state;

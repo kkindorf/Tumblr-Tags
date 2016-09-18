@@ -27,14 +27,45 @@ var POST_TUMBLR_ERROR = 'POST_TUMBLR_ERROR';
 var postTumblrError = function(postedData, error){
     return {
         type: POST_TUMBLR_ERROR,
-        savedTumblrData: postedData,
+        postedData: postedData,
         error: error
     }
 }
 
+var FETCH_POSTS_FROM_DB_SUCCESS = 'FETCH_POSTS_FROM_DB_SUCCESS';
+var fetchPostsFromDbSuccess = function(dbData){
+    return {
+        type: FETCH_POSTS_FROM_DB_SUCCESS,
+        dbData: dbData
+        
+    }
+}
+
+var FETCH_POSTS_FROM_DB_ERROR = 'FETCH_POSTS_FROM_DB_ERROR';
+var fetchPostsFromDbError = function(error){
+    return {
+        type: FETCH_POSTS_FROM_DB_ERROR,
+        error: error
+    }
+}
+
+var DELETE_CARD_FROM_DB_SUCCESS = 'DELETE_CARD_FROM_DB_SUCCESS';
+var deleteCardFromDbSuccess = function(id){
+    return {
+        type: DELETE_CARD_FROM_DB_SUCCESS,
+        id: id
+    }
+}
+
+var DELETE_CARD_FROM_DB_ERROR = 'DELETE_CARD_FROM_DB_ERROR';
+var deleteCardFromDbError = function(error){
+    type: DELETE_CARD_FROM_DB_ERROR;
+    error: error
+}
 var fetchTumblrData = function(query){
     return function(dispatch){
         var url = 'https://crossorigin.me/http://api.tumblr.com/v2/tagged?tag='+query+'&limit=300&api_key=F2iyRm0Ffc73oZncziOzs4SRvswAbAMQG4VS2ErSAHEtSB3JRz';
+        /*var url = 'https://tumblr-api-kkindorf.c9users.io/status';*/
         return fetch(url)
         .then(function(response){
                if(response.state < 200 || response.status >= 300){
@@ -62,6 +93,7 @@ var postTumblrData = function(postedData){
         fetch(url,{
             method: 'post',
             headers: {'content-type': 'application/json'},
+            //I don't need a body?
             body: JSON.stringify({postedData})
         })
         .then(function(res){
@@ -74,6 +106,61 @@ var postTumblrData = function(postedData){
         })
     }
 }
+
+var fetchDbData = function(dbData){
+    return function(dispatch){
+        var url = '/saved-cards';
+        return fetch(url)
+        .then(function(response){
+              if(response.state < 200 || response.status >= 300){
+                var error = new Error(response.statusText)
+                error.response = response
+                throw error;
+            }
+            return response.json();
+        })
+        .then(function(dbData){
+            return dispatch(fetchPostsFromDbSuccess(dbData))
+        })
+        .catch(function(error){
+            return dispatch(fetchPostsFromDbError(error))
+        })
+    }
+}
+
+var deleteDbData = function(id){
+    return function(dispatch){
+        var url = '/saved-cards/'+id;
+        fetch(url,{
+            method: 'delete',
+            headers: {'content-type': 'application/json'}
+        })
+        .then(function(response){
+            if(response.state < 200 || response.status >= 300){
+                var error = new Error(response.statusText)
+                error.response = response
+                throw error;
+            }
+            return response.json();
+        })
+        .then(function(id){
+            console.log('from line 144 in delete fetch', id)
+            return dispatch(deleteCardFromDbSuccess(id))
+        })
+        .catch(function(error){
+            return dispatch(deleteCardFromDbError(error))
+        })
+    }
+}
+
+exports.deleteDbData = deleteDbData;
+exports.DELETE_CARD_FROM_DB_SUCCESS = DELETE_CARD_FROM_DB_SUCCESS;
+exports.DELETE_CARD_FROM_DB_ERROR = DELETE_CARD_FROM_DB_ERROR;
+exports.fetchDbData = fetchDbData;
+exports.fetchPostsFromDbError = fetchPostsFromDbError;
+exports.fetchPostsFromDbSuccess = fetchPostsFromDbSuccess;
+exports.FETCH_POSTS_FROM_DB_ERROR = FETCH_POSTS_FROM_DB_ERROR;
+exports.FETCH_POSTS_FROM_DB_SUCCESS = FETCH_POSTS_FROM_DB_SUCCESS;
 exports.postTumblrData = postTumblrData;
 exports.postTumblrSuccess = postTumblrSuccess;
 exports.postTumblrError = postTumblrError;
