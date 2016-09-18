@@ -27232,7 +27232,7 @@
 	};
 	var fetchTumblrData = function fetchTumblrData(query) {
 	    return function (dispatch) {
-	        var url = 'https://crossorigin.me/http://api.tumblr.com/v2/tagged?tag=' + query + '&limit=300&api_key=F2iyRm0Ffc73oZncziOzs4SRvswAbAMQG4VS2ErSAHEtSB3JRz';
+	        var url = '/search?' + query;
 	        /*var url = 'https://tumblr-api-kkindorf.c9users.io/status';*/
 	        return fetch(url).then(function (response) {
 	            if (response.state < 200 || response.status >= 300) {

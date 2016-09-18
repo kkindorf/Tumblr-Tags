@@ -2,6 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var config = require('./config');
+var http = require('http');
+
 var app = express();
 app.use(bodyParser.json());
 app.use(express.static('build'));
@@ -32,9 +34,15 @@ if(require.main === module){
 exports.app = app;
 exports.runServer = runServer;
 var SaveCard = require("./model/saveCard");
-app.get('/hello', function(req,res){
-    return res.json({message: 'Hello world!'})
-})
+
+app.get("/search", function(req, res){
+   var query = Object.keys(req.query);
+   var url = "http://api.tumblr.com/v2/tagged?tag="+query[0]+"&limit=300&api_key=F2iyRm0Ffc73oZncziOzs4SRvswAbAMQG4VS2ErSAHEtSB3JRz";
+   http.get(url, function(resp){
+       //console.log(res);
+       resp.pipe(res);
+   })
+});
 app.get('/saved-cards', function(req, res){
     
     SaveCard.find(function(err, savedCards){
