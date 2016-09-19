@@ -4,7 +4,7 @@ var SavecardSchema = new mongoose.Schema({
     src: String,
     blogName: String,
     summary: String,
-    timeStamp: Number,
+    postUrl: String,
     date: { type: Date, default: Date.now }
 
 });

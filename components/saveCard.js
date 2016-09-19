@@ -13,14 +13,12 @@ var SaveCard = React.createClass({
         return(
             
            <div className="card">
-             <img className="card-img-top" src={this.props.src} alt="Card image cap"/>
+             <a href={this.props.postUrl}><img className="card-img-top img-responsive" src={this.props.src} alt="Card image cap"/></a>
              <div className="card-block">
-               <h4 className="card-title">{this.props.blogName} </h4>
+               <h4 className="card-title">{this.props.blogName}</h4>
                <p className="card-text">{this.props.summary}</p>
-               <p className="card-text"><small className="text-muted">Posted: {this.props.timestamp}</small></p>
                <p className="display-none">{this.props.id}</p>
-               
-               <button className="btn btn-default" type="button" onClick={this.deleted}>Delete Me!</button>
+               <button className="btn btn-default" type="button" onClick={this.deleted}>Button</button>
              </div>
            </div>
            

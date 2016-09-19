@@ -18,12 +18,12 @@ var SaveContainer = React.createClass({
                     <SaveCard blogName = {item.blogName}
                             src = {item.src}  
                             summary = {item.summary}
-                            timeStamp = {item.timeStamp}
+                            postUrl = {item.postUrl}
                             id = {itemId} />
                 )
      })
         return(
-            <div>
+            <div className="text-center">
                 <Link to= {'/'}>
                     <button className="btn btn-default"  role="button">Previous Search</button>
                 </Link>

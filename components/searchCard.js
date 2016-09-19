@@ -9,7 +9,7 @@ var SearchCard = React.createClass({
             src: this.props.src,
             blogName: this.props.blogName,
             summary: this.props.summary,
-            timeStamp: this.props.timeStamp
+            postUrl: this.props.postUrl
         }))
         
     },
@@ -17,11 +17,10 @@ var SearchCard = React.createClass({
         return(
             
            <div className="card">
-             <img className="card-img-top" src={this.props.src} alt="Card image cap"/>
+             <a href={this.props.postUrl}><img className="card-img-top img-responsive" src={this.props.src} alt="Card image cap"/></a>
              <div className="card-block">
                <h4 className="card-title">{this.props.blogName}</h4>
                <p className="card-text">{this.props.summary}</p>
-               <p className="card-text"><small className="text-muted">Posted: {this.props.timeStamp}</small></p>
                <button className="btn btn-default" type="button" onClick={this.saved}>Button</button>
              </div>
            </div>

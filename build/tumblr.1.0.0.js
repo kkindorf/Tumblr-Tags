@@ -29580,12 +29580,12 @@
 	            return React.createElement(SaveCard, { blogName: item.blogName,
 	                src: item.src,
 	                summary: item.summary,
-	                timeStamp: item.timeStamp,
+	                postUrl: item.postUrl,
 	                id: itemId });
 	        });
 	        return React.createElement(
 	            'div',
-	            null,
+	            { className: 'text-center' },
 	            React.createElement(
 	                Link,
 	                { to: '/' },
@@ -29631,30 +29631,23 @@
 	        return React.createElement(
 	            'div',
 	            { className: 'card' },
-	            React.createElement('img', { className: 'card-img-top', src: this.props.src, alt: 'Card image cap' }),
+	            React.createElement(
+	                'a',
+	                { href: this.props.postUrl },
+	                React.createElement('img', { className: 'card-img-top img-responsive', src: this.props.src, alt: 'Card image cap' })
+	            ),
 	            React.createElement(
 	                'div',
 	                { className: 'card-block' },
 	                React.createElement(
 	                    'h4',
 	                    { className: 'card-title' },
-	                    this.props.blogName,
-	                    ' '
+	                    this.props.blogName
 	                ),
 	                React.createElement(
 	                    'p',
 	                    { className: 'card-text' },
 	                    this.props.summary
-	                ),
-	                React.createElement(
-	                    'p',
-	                    { className: 'card-text' },
-	                    React.createElement(
-	                        'small',
-	                        { className: 'text-muted' },
-	                        'Posted: ',
-	                        this.props.timestamp
-	                    )
 	                ),
 	                React.createElement(
 	                    'p',
@@ -29664,7 +29657,7 @@
 	                React.createElement(
 	                    'button',
 	                    { className: 'btn btn-default', type: 'button', onClick: this.deleted },
-	                    'Delete Me!'
+	                    'Button'
 	                )
 	            )
 	        );
@@ -29690,9 +29683,6 @@
 	var SearchContainer = React.createClass({
 	    displayName: 'SearchContainer',
 	
-	    componentDidMount: function componentDidMount() {
-	        this.props.dispatch(actions.fetchTumblrData('Justin Bieber gifs'));
-	    },
 	    onSubmit: function onSubmit(e) {
 	        e.preventDefault();
 	        var query = this.refs.input.value;
@@ -29708,14 +29698,14 @@
 	                return React.createElement(SearchCard, { blogName: item.blog_name,
 	                    src: item.photos[0].alt_sizes[1].url,
 	                    summary: item.summary,
-	                    timeStamp: item.timestamp
+	                    postUrl: item.post_url
 	
 	                });
 	            }
 	        });
 	        return React.createElement(
 	            'div',
-	            null,
+	            { className: 'text-center' },
 	            React.createElement(
 	                'div',
 	                { className: 'col-xs-12' },
@@ -29725,11 +29715,7 @@
 	                    React.createElement('input', { type: 'text', className: 'form-control', ref: 'input', placeholder: ' Search for gif, Bill Murray, Batman, Smithsonian...' })
 	                )
 	            ),
-	            React.createElement(
-	                'div',
-	                null,
-	                tumblrResults
-	            )
+	            tumblrResults
 	        );
 	    }
 	});
@@ -29762,14 +29748,18 @@
 	            src: this.props.src,
 	            blogName: this.props.blogName,
 	            summary: this.props.summary,
-	            timeStamp: this.props.timeStamp
+	            postUrl: this.props.postUrl
 	        }));
 	    },
 	    render: function render() {
 	        return React.createElement(
 	            'div',
 	            { className: 'card' },
-	            React.createElement('img', { className: 'card-img-top', src: this.props.src, alt: 'Card image cap' }),
+	            React.createElement(
+	                'a',
+	                { href: this.props.postUrl },
+	                React.createElement('img', { className: 'card-img-top img-responsive', src: this.props.src, alt: 'Card image cap' })
+	            ),
 	            React.createElement(
 	                'div',
 	                { className: 'card-block' },
@@ -29782,16 +29772,6 @@
 	                    'p',
 	                    { className: 'card-text' },
 	                    this.props.summary
-	                ),
-	                React.createElement(
-	                    'p',
-	                    { className: 'card-text' },
-	                    React.createElement(
-	                        'small',
-	                        { className: 'text-muted' },
-	                        'Posted: ',
-	                        this.props.timeStamp
-	                    )
 	                ),
 	                React.createElement(
 	                    'button',
