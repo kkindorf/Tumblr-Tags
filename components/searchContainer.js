@@ -14,6 +14,7 @@ var SearchContainer = React.createClass({
     },
     render: function(){
         tumblrResults = this.props.tumblrDataResponse.map(function(item, id){
+            console.log(item.post_url)
             if(!item.photos){
                 return;
             }else{
@@ -31,6 +32,7 @@ var SearchContainer = React.createClass({
         return(
             <div className="text-center">
                 <div className="col-xs-12">
+                
                     <form onSubmit={this.onSubmit}>
                     <input type="text" className="form-control" ref='input'  placeholder=" Search for gif, Bill Murray, Batman, Smithsonian..."/>
                     </form>

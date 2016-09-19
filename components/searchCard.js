@@ -6,10 +6,11 @@ var SearchCard = React.createClass({
     saved: function(){
         console.log('from line six searchCard', this.props.src);
         this.props.dispatch(actions.postTumblrData(postedData = {
-            src: this.props.src,
+            postUrl: this.props.postUrl,
             blogName: this.props.blogName,
-            summary: this.props.summary,
-            postUrl: this.props.postUrl
+            src: this.props.src,
+            summary: this.props.summary
+            
         }))
         
     },
