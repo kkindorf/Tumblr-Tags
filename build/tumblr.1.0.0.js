@@ -27235,7 +27235,7 @@
 	        var url = 'https://serene-ridge-74209.herokuapp.com/search?' + query;
 	        /*var url = 'https://tumblr-api-kkindorf.c9users.io/status';*/
 	        return fetch(url, {
-	            mode: 'cors'
+	            mode: 'no-cors'
 	        }).then(function (response) {
 	            if (response.state < 200 || response.status >= 300) {
 	                var error = new Error(response.statusText);
@@ -27258,7 +27258,7 @@
 	    return function (dispatch) {
 	        var url = 'https://serene-ridge-74209.herokuapp.com/saved-cards';
 	        fetch(url, {
-	            mode: 'cors',
+	            mode: 'no-cors',
 	            method: 'post',
 	            headers: { 'content-type': 'application/json' },
 	            //I don't need a body?
@@ -27277,7 +27277,7 @@
 	    return function (dispatch) {
 	        var url = 'https://serene-ridge-74209.herokuapp.com/saved-cards';
 	        return fetch(url, {
-	            mode: 'cors'
+	            mode: 'no-cors'
 	        }).then(function (response) {
 	            if (response.state < 200 || response.status >= 300) {
 	                var error = new Error(response.statusText);
@@ -27297,7 +27297,7 @@
 	    return function (dispatch) {
 	        var url = 'https://serene-ridge-74209.herokuapp.com/saved-cards/' + id;
 	        fetch(url, {
-	            mode: 'cors',
+	            mode: 'no-cors',
 	            method: 'delete',
 	            headers: { 'content-type': 'application/json' }
 	        }).then(function (response) {
