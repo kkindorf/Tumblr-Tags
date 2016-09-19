@@ -27232,11 +27232,9 @@
 	};
 	var fetchTumblrData = function fetchTumblrData(query) {
 	    return function (dispatch) {
-	        var url = 'https://serene-ridge-74209.herokuapp.com/search?' + query;
+	        var url = 'http://serene-ridge-74209.herokuapp.com/search?' + query;
 	        /*var url = 'https://tumblr-api-kkindorf.c9users.io/status';*/
-	        return fetch(url, {
-	            mode: 'no-cors'
-	        }).then(function (response) {
+	        return fetch(url).then(function (response) {
 	            if (response.state < 200 || response.status >= 300) {
 	                var error = new Error(response.statusText);
 	                error.response = response;
@@ -27256,9 +27254,8 @@
 	
 	var postTumblrData = function postTumblrData(postedData) {
 	    return function (dispatch) {
-	        var url = 'https://serene-ridge-74209.herokuapp.com/saved-cards';
+	        var url = 'http://serene-ridge-74209.herokuapp.com/saved-cards';
 	        fetch(url, {
-	            mode: 'no-cors',
 	            method: 'post',
 	            headers: { 'content-type': 'application/json' },
 	            //I don't need a body?
@@ -27275,10 +27272,8 @@
 	
 	var fetchDbData = function fetchDbData(dbData) {
 	    return function (dispatch) {
-	        var url = 'https://serene-ridge-74209.herokuapp.com/saved-cards';
-	        return fetch(url, {
-	            mode: 'no-cors'
-	        }).then(function (response) {
+	        var url = 'http://serene-ridge-74209.herokuapp.com/saved-cards';
+	        return fetch(url).then(function (response) {
 	            if (response.state < 200 || response.status >= 300) {
 	                var error = new Error(response.statusText);
 	                error.response = response;
@@ -27295,9 +27290,8 @@
 	
 	var deleteDbData = function deleteDbData(id) {
 	    return function (dispatch) {
-	        var url = 'https://serene-ridge-74209.herokuapp.com/saved-cards/' + id;
+	        var url = 'http://serene-ridge-74209.herokuapp.com/saved-cards/' + id;
 	        fetch(url, {
-	            mode: 'no-cors',
 	            method: 'delete',
 	            headers: { 'content-type': 'application/json' }
 	        }).then(function (response) {
