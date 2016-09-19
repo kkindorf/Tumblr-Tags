@@ -66,7 +66,9 @@ var fetchTumblrData = function(query){
     return function(dispatch){
         var url = 'https://serene-ridge-74209.herokuapp.com/search?'+query;
         /*var url = 'https://tumblr-api-kkindorf.c9users.io/status';*/
-        return fetch(url)
+        return fetch(url,{
+            mode: 'cors'
+        })
         .then(function(response){
                if(response.state < 200 || response.status >= 300){
                 var error = new Error(response.statusText)
@@ -91,6 +93,7 @@ var postTumblrData = function(postedData){
     return function(dispatch){
         var url= 'https://serene-ridge-74209.herokuapp.com/saved-cards';
         fetch(url,{
+            mode: 'cors',
             method: 'post',
             headers: {'content-type': 'application/json'},
             //I don't need a body?
@@ -110,7 +113,9 @@ var postTumblrData = function(postedData){
 var fetchDbData = function(dbData){
     return function(dispatch){
         var url = 'https://serene-ridge-74209.herokuapp.com/saved-cards';
-        return fetch(url)
+        return fetch(url, {
+            mode: 'cors',
+        })
         .then(function(response){
               if(response.state < 200 || response.status >= 300){
                 var error = new Error(response.statusText)
@@ -132,6 +137,7 @@ var deleteDbData = function(id){
     return function(dispatch){
         var url = 'https://serene-ridge-74209.herokuapp.com/saved-cards/'+id;
         fetch(url,{
+            mode: 'cors',
             method: 'delete',
             headers: {'content-type': 'application/json'}
         })
