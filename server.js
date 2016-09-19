@@ -37,6 +37,7 @@ var SaveCard = require("./model/saveCard");
 
 app.get("/search", function(req, res){
    var query = Object.keys(req.query);
+   console.log(query);
    var url = "http://api.tumblr.com/v2/tagged?tag="+query[0]+"&limit=300&api_key=F2iyRm0Ffc73oZncziOzs4SRvswAbAMQG4VS2ErSAHEtSB3JRz";
    http.get(url, function(resp){
        //console.log(res);
