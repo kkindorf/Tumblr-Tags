@@ -23,7 +23,7 @@ var SaveContainer = React.createClass({
                 )
      })
         return(
-            <div className="text-center">
+            <div className="cards-flex">
                 <Link to= {'/'}>
                     <button className="btn btn-default"  role="button">Previous Search</button>
                 </Link>

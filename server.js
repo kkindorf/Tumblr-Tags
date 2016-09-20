@@ -10,18 +10,19 @@ app.use(express.static('build'));
 console.log(config.DATABASE_URL)
 var runServer = function(callback){
     console.log(config.DATABASE_URL)
+    mongoose.connect(config.DATABASE_URL, function(err){
+        if(err && callback){
+            return callback(err)
+        }
+        
+    })
     app.listen(config.PORT, function(){
             console.log('Listening on localhost: '+config.PORT);
             if(callback){
                 callback();
             }
         })
-    /*mongoose.connect(config.DATABASE_URL, function(err){
-        if(err && callback){
-            return callback(err)
-        }
-        
-    })*/
+    
 }
 
 
@@ -34,7 +35,7 @@ if(require.main === module){
 }
 exports.app = app;
 exports.runServer = runServer;
-/*var SaveCard = require("./model/saveCard");
+var SaveCard = require("./model/saveCard");
 
 app.get("/search", function(req, res){
    var query = Object.keys(req.query);
@@ -93,5 +94,4 @@ app.use('*', function(request, response){
     response.status(404).json({
         message: 'Endpoint Not Found'
     });
-});*/
-
+});

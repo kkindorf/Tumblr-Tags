@@ -1,25 +1,57 @@
-.page-header{
-    position: relative;
-    text-align: center;
-    display: inline;
-    
+
+.padding-bottom{
+    padding-bottom: 10%;
+}
+
+.btn-default{
+    margin-top: 2%;
+    margin-right: 5%;
+}
+.navbar-header{
+    width: 100%;
+}
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 5px 30px;
+    /* font-size: 18px; */
+    line-height: 20px;
+}
+.navbar-btn {
+    margin-left: 10%;
+    margin-bottom: 8px;
+
 }
 .col-xs-12{
     padding-right: 10%;
     padding-left: 10%;
-    padding-bottom: 5%;
+    padding-bottom: 5%
 }
-.card{
-    margin: 0 auto;
-    padding: 5%;
+img{
+    width: 100%;
+    
 }
-
-.text-center{
+.cards-flex{
     display: flex;
     flex-direction: wrap;
     flex-flow: row wrap;
     justify-content: space-around;
 }
+.card{
+    padding-top: 5%;
+    padding-bottom: 5%;
+    max-width: 300px;
+}
+.card-block{
+    width:100%;
+}
+.card-text{
+    width: 80% !important;
+}
+.fa{
+    padding-left: 10%;
+}
+
 .display-none{
     display: none;
 }

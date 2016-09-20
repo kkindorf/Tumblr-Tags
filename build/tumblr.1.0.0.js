@@ -21470,38 +21470,42 @@
 	var SaveContainer = __webpack_require__(268);
 	
 	var Header = React.createClass({
-	    displayName: 'Header',
+	  displayName: 'Header',
 	
 	
-	    render: function render() {
-	        return React.createElement(
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'nav',
+	        { className: 'navbar navbar-default' },
+	        React.createElement(
+	          'div',
+	          { className: 'container-fluid' },
+	          React.createElement(
 	            'div',
-	            null,
+	            { className: 'navbar-header' },
 	            React.createElement(
-	                'div',
-	                { className: 'page-header' },
-	                React.createElement(
-	                    Link,
-	                    { to: '/savedposts' },
-	                    React.createElement(
-	                        'button',
-	                        { className: 'btn btn-default', role: 'button' },
-	                        'Saved Posts'
-	                    )
-	                ),
-	                React.createElement(
-	                    'h1',
-	                    null,
-	                    'Tumblr Tags'
-	                )
+	              'h3',
+	              { className: 'navbar-brand' },
+	              'Tumblr Tags'
 	            ),
 	            React.createElement(
-	                'div',
-	                null,
-	                this.props.children
+	              'button',
+	              { type: 'button', className: 'btn btn-default navbar-btn' },
+	              React.createElement(
+	                Link,
+	                { to: '/savedposts' },
+	                'Saved Posts'
+	              )
 	            )
-	        );
-	    }
+	          )
+	        )
+	      ),
+	      this.props.children
+	    );
+	  }
 	});
 	
 	var Container = connect()(Header);
@@ -27232,7 +27236,7 @@
 	};
 	var fetchTumblrData = function fetchTumblrData(query) {
 	    return function (dispatch) {
-	        var url = 'https://serene-ridge-74209.herokuapp.com/search?' + query;
+	        var url = '/search?' + query;
 	        /*var url = 'https://tumblr-api-kkindorf.c9users.io/status';*/
 	        return fetch(url).then(function (response) {
 	            if (response.state < 200 || response.status >= 300) {
@@ -27254,7 +27258,7 @@
 	
 	var postTumblrData = function postTumblrData(postedData) {
 	    return function (dispatch) {
-	        var url = 'https://serene-ridge-74209.herokuapp.com/saved-cards';
+	        var url = '/saved-cards';
 	        fetch(url, {
 	            method: 'post',
 	            headers: { 'content-type': 'application/json' },
@@ -27272,7 +27276,7 @@
 	
 	var fetchDbData = function fetchDbData(dbData) {
 	    return function (dispatch) {
-	        var url = 'https://serene-ridge-74209.herokuapp.com/saved-cards';
+	        var url = '/saved-cards';
 	        return fetch(url).then(function (response) {
 	            if (response.state < 200 || response.status >= 300) {
 	                var error = new Error(response.statusText);
@@ -27290,7 +27294,7 @@
 	
 	var deleteDbData = function deleteDbData(id) {
 	    return function (dispatch) {
-	        var url = 'https://serene-ridge-74209.herokuapp.com/saved-cards/' + id;
+	        var url = '/saved-cards/' + id;
 	        fetch(url, {
 	            method: 'delete',
 	            headers: { 'content-type': 'application/json' }
@@ -29585,7 +29589,7 @@
 	        });
 	        return React.createElement(
 	            'div',
-	            { className: 'text-center' },
+	            { className: 'cards-flex' },
 	            React.createElement(
 	                Link,
 	                { to: '/' },
@@ -29634,7 +29638,7 @@
 	            React.createElement(
 	                'a',
 	                { href: this.props.postUrl },
-	                React.createElement('img', { className: 'card-img-top img-responsive', src: this.props.src, alt: 'Card image cap' })
+	                React.createElement('img', { className: 'card-img-top', src: this.props.src, alt: 'Card image cap' })
 	            ),
 	            React.createElement(
 	                'div',
@@ -29642,7 +29646,8 @@
 	                React.createElement(
 	                    'h4',
 	                    { className: 'card-title' },
-	                    this.props.blogName
+	                    this.props.blogName,
+	                    React.createElement('i', { className: 'fa fa-trash pull-right', 'aria-hidden': 'true', onClick: this.deleted })
 	                ),
 	                React.createElement(
 	                    'p',
@@ -29653,11 +29658,6 @@
 	                    'p',
 	                    { className: 'display-none' },
 	                    this.props.id
-	                ),
-	                React.createElement(
-	                    'button',
-	                    { className: 'btn btn-default', type: 'button', onClick: this.deleted },
-	                    'Button'
 	                )
 	            )
 	        );
@@ -29706,7 +29706,7 @@
 	        });
 	        return React.createElement(
 	            'div',
-	            { className: 'text-center' },
+	            { className: 'cards-flex' },
 	            React.createElement(
 	                'div',
 	                { className: 'col-xs-12' },
@@ -29760,7 +29760,7 @@
 	            React.createElement(
 	                'a',
 	                { href: this.props.postUrl },
-	                React.createElement('img', { className: 'card-img-top img-responsive', src: this.props.src, alt: 'Card image cap' })
+	                React.createElement('img', { className: 'card-img-top', src: this.props.src, alt: 'Card image cap' })
 	            ),
 	            React.createElement(
 	                'div',
@@ -29768,17 +29768,13 @@
 	                React.createElement(
 	                    'h4',
 	                    { className: 'card-title' },
-	                    this.props.blogName
+	                    this.props.blogName,
+	                    React.createElement('i', { className: 'fa fa-heart pull-right', 'aria-hidden': 'true', onClick: this.saved })
 	                ),
 	                React.createElement(
 	                    'p',
 	                    { className: 'card-text' },
 	                    this.props.summary
-	                ),
-	                React.createElement(
-	                    'button',
-	                    { className: 'btn btn-default', type: 'button', onClick: this.saved },
-	                    'Button'
 	                )
 	            )
 	        );

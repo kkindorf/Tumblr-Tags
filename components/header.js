@@ -12,19 +12,22 @@ var Header = React.createClass({
   
     render: function(){
         return(
-            
             <div>
-                <div className="page-header">
-                <Link to= {'/savedposts'}>
-                    <button className="btn btn-default"  role="button">Saved Posts</button>
-                </Link>
-                    <h1>Tumblr Tags</h1>
-                </div>
-                
-                <div>
-                    {this.props.children}
-                </div>
-            </div>
+            <nav className="navbar navbar-default">
+  <div className="container-fluid">
+    <div className="navbar-header">
+      <h3 className="navbar-brand">Tumblr Tags
+      </h3>
+      <button type="button" className="btn btn-default navbar-btn"><Link to= {'/savedposts'}>Saved Posts</Link></button>
+    </div>
+  </div>
+</nav>
+{this.props.children}
+</div>
+            
+                   
+                    
+              
         );
     }
 });

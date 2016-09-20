@@ -64,7 +64,7 @@ var deleteCardFromDbError = function(error){
 }
 var fetchTumblrData = function(query){
     return function(dispatch){
-        var url = 'https://serene-ridge-74209.herokuapp.com/search?'+query;
+        var url = '/search?'+query;
         /*var url = 'https://tumblr-api-kkindorf.c9users.io/status';*/
         return fetch(url)
         .then(function(response){
@@ -89,7 +89,7 @@ var fetchTumblrData = function(query){
 
 var postTumblrData = function(postedData){
     return function(dispatch){
-        var url= 'https://serene-ridge-74209.herokuapp.com/saved-cards';
+        var url= '/saved-cards';
         fetch(url,{
             method: 'post',
             headers: {'content-type': 'application/json'},
@@ -109,7 +109,7 @@ var postTumblrData = function(postedData){
 
 var fetchDbData = function(dbData){
     return function(dispatch){
-        var url = 'https://serene-ridge-74209.herokuapp.com/saved-cards';
+        var url = '/saved-cards';
         return fetch(url)
         .then(function(response){
               if(response.state < 200 || response.status >= 300){
@@ -130,7 +130,7 @@ var fetchDbData = function(dbData){
 
 var deleteDbData = function(id){
     return function(dispatch){
-        var url = 'https://serene-ridge-74209.herokuapp.com/saved-cards/'+id;
+        var url = '/saved-cards/'+id;
         fetch(url,{
             method: 'delete',
             headers: {'content-type': 'application/json'}

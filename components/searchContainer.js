@@ -30,7 +30,7 @@ var SearchContainer = React.createClass({
             
         })
         return(
-            <div className="text-center">
+            <div className="cards-flex">
                 <div className="col-xs-12">
                 
                     <form onSubmit={this.onSubmit}>
