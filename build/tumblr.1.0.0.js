@@ -27230,7 +27230,7 @@
 	    type: DELETE_CARD_FROM_DB_ERROR;
 	    error: error;
 	};
-	var rootUrl = 'https://tumblr-api-kkindorf.c9users.io';
+	var rootUrl = 'https://serene-ridge-74209.herokuapp.com';
 	var fetchTumblrData = function fetchTumblrData(query) {
 	    return function (dispatch) {
 	        var url = rootUrl + '/search?' + query;
@@ -29634,8 +29634,6 @@
 	        };
 	    },
 	    deleted: function deleted() {
-	        console.log('from line 8 in save card', this.props.id);
-	        console.log('deleted has been clicked!');
 	        if (this.state.hide === 'card') {
 	            this.setState({ hide: 'display-none' });
 	        }

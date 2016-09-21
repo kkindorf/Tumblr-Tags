@@ -9,8 +9,6 @@ var SaveCard = React.createClass({
         };
     },
     deleted: function(){
-        console.log('from line 8 in save card', this.props.id);
-        console.log('deleted has been clicked!');
         if (this.state.hide === 'card'){
             this.setState({hide: 'display-none'});
         }

@@ -62,7 +62,7 @@ var deleteCardFromDbError = function(error){
     type: DELETE_CARD_FROM_DB_ERROR;
     error: error
 }
-var rootUrl = 'https://tumblr-api-kkindorf.c9users.io';
+var rootUrl = 'https://serene-ridge-74209.herokuapp.com';
 var fetchTumblrData = function(query){
     return function(dispatch){
         var url = rootUrl+'/search?'+query;
