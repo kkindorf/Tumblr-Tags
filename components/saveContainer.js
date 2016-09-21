@@ -27,10 +27,11 @@ var SaveContainer = React.createClass({
      })
         return(
             <div className="cards-flex">
+            <div className="button-space">
                 <Link to= {'/'}>
-                    <button className="btn btn-default"  role="button">Previous Search</button>
+                    <button className="btn btn-default"  role="button">Search For More</button>
                 </Link>
-                
+            </div>
               {dbResults}
             </div>    
         )

@@ -9,6 +9,7 @@ var Link = router.Link;
 var tumblrResults = [];
 
 var SearchContainer = React.createClass({
+  
     onSubmit: function(e){
         e.preventDefault();
         var query = this.refs.input.value;
@@ -42,9 +43,11 @@ var SearchContainer = React.createClass({
                     </form>
                     
                 </div>
+                <div className="button-space">
                 <Link to= {'/savedposts'}>
                 <button type="button" className="btn btn-default">Saved Posts</button>
                 </Link>
+                </div>
                 {tumblrResults}
             </div>    
         )

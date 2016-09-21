@@ -29594,12 +29594,16 @@
 	            'div',
 	            { className: 'cards-flex' },
 	            React.createElement(
-	                Link,
-	                { to: '/' },
+	                'div',
+	                { className: 'button-space' },
 	                React.createElement(
-	                    'button',
-	                    { className: 'btn btn-default', role: 'button' },
-	                    'Previous Search'
+	                    Link,
+	                    { to: '/' },
+	                    React.createElement(
+	                        'button',
+	                        { className: 'btn btn-default', role: 'button' },
+	                        'Search For More'
+	                    )
 	                )
 	            ),
 	            dbResults
@@ -29695,6 +29699,7 @@
 	var SearchContainer = React.createClass({
 	    displayName: 'SearchContainer',
 	
+	
 	    onSubmit: function onSubmit(e) {
 	        e.preventDefault();
 	        var query = this.refs.input.value;
@@ -29729,12 +29734,16 @@
 	                )
 	            ),
 	            React.createElement(
-	                Link,
-	                { to: '/savedposts' },
+	                'div',
+	                { className: 'button-space' },
 	                React.createElement(
-	                    'button',
-	                    { type: 'button', className: 'btn btn-default' },
-	                    'Saved Posts'
+	                    Link,
+	                    { to: '/savedposts' },
+	                    React.createElement(
+	                        'button',
+	                        { type: 'button', className: 'btn btn-default' },
+	                        'Saved Posts'
+	                    )
 	                )
 	            ),
 	            tumblrResults
@@ -29761,10 +29770,20 @@
 	var actions = __webpack_require__(236);
 	var connect = __webpack_require__(239).connect;
 	var postedData;
+	var black = "fa fa-heart pull-right black";
+	var red = "fa fa-heart pull-right red";
 	var SearchCard = React.createClass({
 	    displayName: 'SearchCard',
 	
+	    getInitialState: function getInitialState() {
+	        return {
+	            color: black
+	        };
+	    },
 	    saved: function saved() {
+	        if (this.state.color === black) {
+	            this.setState({ color: red });
+	        }
 	        console.log('from line six searchCard', this.props.src);
 	        this.props.dispatch(actions.postTumblrData(postedData = {
 	            postUrl: this.props.postUrl,
@@ -29775,6 +29794,9 @@
 	        }));
 	    },
 	    render: function render() {
+	        if (this.state.color === red) {
+	            this.setState({ color: red });
+	        }
 	        return React.createElement(
 	            'div',
 	            { className: 'card' },
@@ -29790,7 +29812,7 @@
 	                    'h4',
 	                    { className: 'card-title' },
 	                    this.props.blogName,
-	                    React.createElement('i', { className: 'fa fa-heart pull-right', 'aria-hidden': 'true', onClick: this.saved })
+	                    React.createElement('i', { className: this.state.color, 'aria-hidden': 'true', onClick: this.saved })
 	                ),
 	                React.createElement(
 	                    'p',

@@ -2,26 +2,29 @@
 .padding-bottom{
     padding-bottom: 10%;
 }
-
+.button-space{
+    padding: 5%;
+    text-align: center;
+}
 .btn-default{
     margin-top: 2%;
     margin-right: 5%;
+    padding: 3%;
+    background: yellow;
+    color: white;
+    width: 100%;
 }
 .navbar-header{
     width: 100%;
+    text-align: center !important;
 }
 .navbar-brand {
-    float: left;
     height: 50px;
     padding: 5px 30px;
     /* font-size: 18px; */
     line-height: 20px;
 }
-.navbar-btn {
-    margin-left: 10%;
-    margin-bottom: 8px;
 
-}
 .col-xs-12{
     padding-right: 10%;
     padding-left: 10%;
@@ -33,14 +36,14 @@ img{
 }
 .cards-flex{
     display: flex;
-    flex-direction: wrap;
-    flex-flow: row wrap;
+    flex-direction: column;
     justify-content: space-around;
 }
 .card{
+    margin: 2%;
     padding-top: 5%;
     padding-bottom: 5%;
-    max-width: 300px;
+    max-width: 400px;
 }
 .card-block{
     width:100%;
@@ -51,7 +54,12 @@ img{
 .fa{
     padding-left: 10%;
 }
-
+.black {
+    color: black;
+}
+.red{
+    color: red;
+}
 .display-none{
     display: none;
 }
