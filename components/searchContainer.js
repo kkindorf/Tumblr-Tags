@@ -2,6 +2,10 @@ var React = require('react');
 var SearchCard = require('./searchCard');
 var actions = require('../actions');
 var connect = require('react-redux').connect;
+var router = require('react-router');
+var Router = router.Router;
+var Route = router.Route;
+var Link = router.Link;
 var tumblrResults = [];
 
 var SearchContainer = React.createClass({
@@ -36,7 +40,11 @@ var SearchContainer = React.createClass({
                     <form onSubmit={this.onSubmit}>
                     <input type="text" className="form-control" ref='input'  placeholder=" Search for gif, Bill Murray, Batman, Smithsonian..."/>
                     </form>
+                    
                 </div>
+                <Link to= {'/savedposts'}>
+                <button type="button" className="btn btn-default">Saved Posts</button>
+                </Link>
                 {tumblrResults}
             </div>    
         )

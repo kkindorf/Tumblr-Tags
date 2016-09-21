@@ -7,9 +7,10 @@ var Link = router.Link;
 var actions = require('../actions')
 var connect = require('react-redux').connect;
 var SaveContainer= require('./saveContainer');
+var SearchContainer = require('./searchContainer')
 
 var Header = React.createClass({
-  
+    
     render: function(){
         return(
             <div>
@@ -18,14 +19,14 @@ var Header = React.createClass({
     <div className="navbar-header">
       <h3 className="navbar-brand">Tumblr Tags
       </h3>
-      <button type="button" className="btn btn-default navbar-btn"><Link to= {'/savedposts'}>Saved Posts</Link></button>
+      
     </div>
   </div>
 </nav>
+<div>
 {this.props.children}
 </div>
-            
-                   
+</div>
                     
               
         );

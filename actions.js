@@ -62,9 +62,10 @@ var deleteCardFromDbError = function(error){
     type: DELETE_CARD_FROM_DB_ERROR;
     error: error
 }
+var rootUrl = 'https://tumblr-api-kkindorf.c9users.io';
 var fetchTumblrData = function(query){
     return function(dispatch){
-        var url = '/search?'+query;
+        var url = rootUrl+'/search?'+query;
         /*var url = 'https://tumblr-api-kkindorf.c9users.io/status';*/
         return fetch(url)
         .then(function(response){
@@ -89,11 +90,12 @@ var fetchTumblrData = function(query){
 
 var postTumblrData = function(postedData){
     return function(dispatch){
-        var url= '/saved-cards';
+        var url= rootUrl+'/saved-cards';
         fetch(url,{
             method: 'post',
-            headers: {'content-type': 'application/json'},
-            //I don't need a body?
+            headers: {'content-type': 'application/json',
+                      'X-Requested-With' : 'XMLHttpRequest'
+            },
             body: JSON.stringify({postedData})
         })
         .then(function(res){
@@ -109,7 +111,7 @@ var postTumblrData = function(postedData){
 
 var fetchDbData = function(dbData){
     return function(dispatch){
-        var url = '/saved-cards';
+        var url = rootUrl+'/saved-cards';
         return fetch(url)
         .then(function(response){
               if(response.state < 200 || response.status >= 300){
@@ -120,6 +122,7 @@ var fetchDbData = function(dbData){
             return response.json();
         })
         .then(function(dbData){
+            console.log('from line 125 in fetch db', dbData)
             return dispatch(fetchPostsFromDbSuccess(dbData))
         })
         .catch(function(error){
@@ -130,10 +133,11 @@ var fetchDbData = function(dbData){
 
 var deleteDbData = function(id){
     return function(dispatch){
-        var url = '/saved-cards/'+id;
+        var url = rootUrl+'/saved-cards/'+id;
         fetch(url,{
             method: 'delete',
-            headers: {'content-type': 'application/json'}
+            headers: {'content-type': 'application/json'
+            }
         })
         .then(function(response){
             if(response.state < 200 || response.status >= 300){

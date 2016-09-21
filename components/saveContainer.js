@@ -9,8 +9,11 @@ var Link = router.Link;
 var dbResults = [];
 var itemId = '';
 var SaveContainer = React.createClass({
-    render: function(){
+    componentDidMount: function(){
         this.props.dispatch(actions.fetchDbData(this.props.dbData))
+    },
+    render: function(){
+        
         dbResults = this.props.dbData.map(function(item, id){
             itemId = item._id;
             //console.log('from line 17 in save container', itemId)

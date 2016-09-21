@@ -21468,6 +21468,7 @@
 	var actions = __webpack_require__(236);
 	var connect = __webpack_require__(239).connect;
 	var SaveContainer = __webpack_require__(268);
+	var SearchContainer = __webpack_require__(270);
 	
 	var Header = React.createClass({
 	  displayName: 'Header',
@@ -21490,20 +21491,15 @@
 	              'h3',
 	              { className: 'navbar-brand' },
 	              'Tumblr Tags'
-	            ),
-	            React.createElement(
-	              'button',
-	              { type: 'button', className: 'btn btn-default navbar-btn' },
-	              React.createElement(
-	                Link,
-	                { to: '/savedposts' },
-	                'Saved Posts'
-	              )
 	            )
 	          )
 	        )
 	      ),
-	      this.props.children
+	      React.createElement(
+	        'div',
+	        null,
+	        this.props.children
+	      )
 	    );
 	  }
 	});
@@ -27234,9 +27230,10 @@
 	    type: DELETE_CARD_FROM_DB_ERROR;
 	    error: error;
 	};
+	var rootUrl = 'https://tumblr-api-kkindorf.c9users.io';
 	var fetchTumblrData = function fetchTumblrData(query) {
 	    return function (dispatch) {
-	        var url = '/search?' + query;
+	        var url = rootUrl + '/search?' + query;
 	        /*var url = 'https://tumblr-api-kkindorf.c9users.io/status';*/
 	        return fetch(url).then(function (response) {
 	            if (response.state < 200 || response.status >= 300) {
@@ -27258,11 +27255,12 @@
 	
 	var postTumblrData = function postTumblrData(postedData) {
 	    return function (dispatch) {
-	        var url = '/saved-cards';
+	        var url = rootUrl + '/saved-cards';
 	        fetch(url, {
 	            method: 'post',
-	            headers: { 'content-type': 'application/json' },
-	            //I don't need a body?
+	            headers: { 'content-type': 'application/json',
+	                'X-Requested-With': 'XMLHttpRequest'
+	            },
 	            body: JSON.stringify({ postedData: postedData })
 	        }).then(function (res) {
 	            console.log('logging response inside fetch post', res);
@@ -27276,7 +27274,7 @@
 	
 	var fetchDbData = function fetchDbData(dbData) {
 	    return function (dispatch) {
-	        var url = '/saved-cards';
+	        var url = rootUrl + '/saved-cards';
 	        return fetch(url).then(function (response) {
 	            if (response.state < 200 || response.status >= 300) {
 	                var error = new Error(response.statusText);
@@ -27285,6 +27283,7 @@
 	            }
 	            return response.json();
 	        }).then(function (dbData) {
+	            console.log('from line 125 in fetch db', dbData);
 	            return dispatch(fetchPostsFromDbSuccess(dbData));
 	        }).catch(function (error) {
 	            return dispatch(fetchPostsFromDbError(error));
@@ -27294,10 +27293,11 @@
 	
 	var deleteDbData = function deleteDbData(id) {
 	    return function (dispatch) {
-	        var url = '/saved-cards/' + id;
+	        var url = rootUrl + '/saved-cards/' + id;
 	        fetch(url, {
 	            method: 'delete',
-	            headers: { 'content-type': 'application/json' }
+	            headers: { 'content-type': 'application/json'
+	            }
 	        }).then(function (response) {
 	            if (response.state < 200 || response.status >= 300) {
 	                var error = new Error(response.statusText);
@@ -29576,8 +29576,11 @@
 	var SaveContainer = React.createClass({
 	    displayName: 'SaveContainer',
 	
-	    render: function render() {
+	    componentDidMount: function componentDidMount() {
 	        this.props.dispatch(actions.fetchDbData(this.props.dbData));
+	    },
+	    render: function render() {
+	
 	        dbResults = this.props.dbData.map(function (item, id) {
 	            itemId = item._id;
 	            //console.log('from line 17 in save container', itemId)
@@ -29625,16 +29628,23 @@
 	var SaveCard = React.createClass({
 	    displayName: 'SaveCard',
 	
-	
+	    getInitialState: function getInitialState() {
+	        return {
+	            hide: 'card'
+	        };
+	    },
 	    deleted: function deleted() {
 	        console.log('from line 8 in save card', this.props.id);
 	        console.log('deleted has been clicked!');
+	        if (this.state.hide === 'card') {
+	            this.setState({ hide: 'display-none' });
+	        }
 	        this.props.dispatch(actions.deleteDbData(this.props.id));
 	    },
 	    render: function render() {
 	        return React.createElement(
 	            'div',
-	            { className: 'card' },
+	            { className: this.state.hide },
 	            React.createElement(
 	                'a',
 	                { href: this.props.postUrl },
@@ -29678,6 +29688,10 @@
 	var SearchCard = __webpack_require__(271);
 	var actions = __webpack_require__(236);
 	var connect = __webpack_require__(239).connect;
+	var router = __webpack_require__(173);
+	var Router = router.Router;
+	var Route = router.Route;
+	var Link = router.Link;
 	var tumblrResults = [];
 	
 	var SearchContainer = React.createClass({
@@ -29714,6 +29728,15 @@
 	                    'form',
 	                    { onSubmit: this.onSubmit },
 	                    React.createElement('input', { type: 'text', className: 'form-control', ref: 'input', placeholder: ' Search for gif, Bill Murray, Batman, Smithsonian...' })
+	                )
+	            ),
+	            React.createElement(
+	                Link,
+	                { to: '/savedposts' },
+	                React.createElement(
+	                    'button',
+	                    { type: 'button', className: 'btn btn-default' },
+	                    'Saved Posts'
 	                )
 	            ),
 	            tumblrResults
