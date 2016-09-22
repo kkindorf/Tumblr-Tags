@@ -9,7 +9,6 @@ var Link = router.Link;
 var tumblrResults = [];
 
 var SearchContainer = React.createClass({
-  
     onSubmit: function(e){
         e.preventDefault();
         var query = this.refs.input.value;
@@ -17,6 +16,7 @@ var SearchContainer = React.createClass({
         this.props.dispatch(actions.fetchTumblrData(query))
        this.refs.input.value ='';
     },
+    
     render: function(){
         tumblrResults = this.props.tumblrDataResponse.map(function(item, id){
             console.log(item.post_url)
@@ -35,19 +35,18 @@ var SearchContainer = React.createClass({
             
         })
         return(
-            <div className="cards-flex">
+            
+           
+            <div className="search-cards-flex">
+             <Link to= {'/savedposts'}>
+                    <button type="button" onClick={this.onClick} className="btn btn-default">Saved Posts</button>
+            </Link>
                 <div className="col-xs-12">
-                
                     <form onSubmit={this.onSubmit}>
-                    <input type="text" className="form-control" ref='input'  placeholder=" Search for gif, Bill Murray, Batman, Smithsonian..."/>
+                        <input type="text" className="form-control" ref='input'  placeholder=" Search for gif, Bill Murray, Batman, Smithsonian..."/>
                     </form>
-                    
                 </div>
-                <div className="button-space">
-                <Link to= {'/savedposts'}>
-                <button type="button" className="btn btn-default">Saved Posts</button>
-                </Link>
-                </div>
+                
                 {tumblrResults}
             </div>    
         )

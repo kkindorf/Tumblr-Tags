@@ -2,58 +2,69 @@
 .padding-bottom{
     padding-bottom: 10%;
 }
-.button-space{
-    padding: 5%;
+* {
+  border-radius: 0 !important;
+}
+.text-align-center{
     text-align: center;
+    padding: 2%;
 }
-.btn-default{
-    margin-top: 2%;
-    margin-right: 5%;
-    padding: 3%;
-    background: yellow;
-    color: white;
-    width: 100%;
-}
-.navbar-header{
-    width: 100%;
-    text-align: center !important;
-}
-.navbar-brand {
-    height: 50px;
-    padding: 5px 30px;
-    /* font-size: 18px; */
-    line-height: 20px;
-}
-
 .col-xs-12{
     padding-right: 10%;
     padding-left: 10%;
-    padding-bottom: 5%
+    padding-top: 3%;
+    padding-bottom: 3%
+}
+
+.btn{
+    padding: 10px 25px;
+}
+.btn-default{
+    background: #9370DB;
+    color: #FFFFF0;
+    border-color: #9370DB;
+}
+.btn-default:hover {
+    background: #9370DB;
+    color:#FFFFF0;
+    border-color: #9370DB;
+}
+.search-cards-flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+}
+
+.save-cards-flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.card{
+    max-width: 400px;
+}
+
+.save-card{
+    margin: 2% !important;
+    padding: 2% !important;
+    max-width: 250px !important; 
 }
 img{
     width: 100%;
-    
-}
-.cards-flex{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-.card{
-    margin: 2%;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    max-width: 400px;
+
 }
 .card-block{
     width:100%;
 }
+.fa{
+    padding-left: 10%
+}
 .card-text{
     width: 80% !important;
 }
-.fa{
-    padding-left: 10%;
-}
+
 .black {
     color: black;
 }

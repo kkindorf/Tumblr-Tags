@@ -12,6 +12,7 @@ var SaveContainer = React.createClass({
     componentDidMount: function(){
         this.props.dispatch(actions.fetchDbData(this.props.dbData))
     },
+    
     render: function(){
         
         dbResults = this.props.dbData.map(function(item, id){
@@ -26,14 +27,16 @@ var SaveContainer = React.createClass({
                 )
      })
         return(
-            <div className="cards-flex">
-            <div className="button-space">
-                <Link to= {'/'}>
-                    <button className="btn btn-default"  role="button">Search For More</button>
-                </Link>
+            <div>
+                <div className="text-align-center">
+                     <Link to= {'/'}>
+                       <button className="btn btn-default"  role="button">Previous Search</button>
+                    </Link>
+                </div>
+                <div className="save-cards-flex">
+                    {dbResults}
+                </div>   
             </div>
-              {dbResults}
-            </div>    
         )
     }
 })

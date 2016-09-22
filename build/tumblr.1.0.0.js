@@ -57,7 +57,7 @@
 	var hashHistory = router.hashHistory;
 	var IndexRoute = router.IndexRoute;
 	var Provider = __webpack_require__(239).Provider;
-	var store = __webpack_require__(272);
+	var store = __webpack_require__(274);
 	var actions = __webpack_require__(236);
 	var connect = __webpack_require__(239).connect;
 	
@@ -21469,39 +21469,35 @@
 	var connect = __webpack_require__(239).connect;
 	var SaveContainer = __webpack_require__(268);
 	var SearchContainer = __webpack_require__(270);
-	
 	var Header = React.createClass({
-	  displayName: 'Header',
+	    displayName: 'Header',
 	
 	
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'nav',
-	        { className: 'navbar navbar-default' },
-	        React.createElement(
-	          'div',
-	          { className: 'container-fluid' },
-	          React.createElement(
+	    render: function render() {
+	        return React.createElement(
 	            'div',
-	            { className: 'navbar-header' },
+	            null,
 	            React.createElement(
-	              'h3',
-	              { className: 'navbar-brand' },
-	              'Tumblr Tags'
+	                'div',
+	                { className: 'text-align-center' },
+	                React.createElement(
+	                    'h2',
+	                    null,
+	                    'Tumblr Tags'
+	                ),
+	                React.createElement(
+	                    'span',
+	                    null,
+	                    'Search for images on tumblr by tag. Save them for others to see.'
+	                )
+	            ),
+	            React.createElement(
+	                'div',
+	                null,
+	                this.props.children
 	            )
-	          )
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        null,
-	        this.props.children
-	      )
-	    );
-	  }
+	        );
+	    }
 	});
 	
 	var Container = connect()(Header);
@@ -29579,6 +29575,7 @@
 	    componentDidMount: function componentDidMount() {
 	        this.props.dispatch(actions.fetchDbData(this.props.dbData));
 	    },
+	
 	    render: function render() {
 	
 	        dbResults = this.props.dbData.map(function (item, id) {
@@ -29592,21 +29589,25 @@
 	        });
 	        return React.createElement(
 	            'div',
-	            { className: 'cards-flex' },
+	            null,
 	            React.createElement(
 	                'div',
-	                { className: 'button-space' },
+	                { className: 'text-align-center' },
 	                React.createElement(
 	                    Link,
 	                    { to: '/' },
 	                    React.createElement(
 	                        'button',
 	                        { className: 'btn btn-default', role: 'button' },
-	                        'Search For More'
+	                        'Previous Search'
 	                    )
 	                )
 	            ),
-	            dbResults
+	            React.createElement(
+	                'div',
+	                { className: 'save-cards-flex' },
+	                dbResults
+	            )
 	        );
 	    }
 	});
@@ -29634,11 +29635,11 @@
 	
 	    getInitialState: function getInitialState() {
 	        return {
-	            hide: 'card'
+	            hide: 'save-card card'
 	        };
 	    },
 	    deleted: function deleted() {
-	        if (this.state.hide === 'card') {
+	        if (this.state.hide === 'save-card card') {
 	            this.setState({ hide: 'display-none' });
 	        }
 	        this.props.dispatch(actions.deleteDbData(this.props.id));
@@ -29699,7 +29700,6 @@
 	var SearchContainer = React.createClass({
 	    displayName: 'SearchContainer',
 	
-	
 	    onSubmit: function onSubmit(e) {
 	        e.preventDefault();
 	        var query = this.refs.input.value;
@@ -29707,6 +29707,7 @@
 	        this.props.dispatch(actions.fetchTumblrData(query));
 	        this.refs.input.value = '';
 	    },
+	
 	    render: function render() {
 	        tumblrResults = this.props.tumblrDataResponse.map(function (item, id) {
 	            console.log(item.post_url);
@@ -29723,7 +29724,16 @@
 	        });
 	        return React.createElement(
 	            'div',
-	            { className: 'cards-flex' },
+	            { className: 'search-cards-flex' },
+	            React.createElement(
+	                Link,
+	                { to: '/savedposts' },
+	                React.createElement(
+	                    'button',
+	                    { type: 'button', onClick: this.onClick, className: 'btn btn-default' },
+	                    'Saved Posts'
+	                )
+	            ),
 	            React.createElement(
 	                'div',
 	                { className: 'col-xs-12' },
@@ -29731,19 +29741,6 @@
 	                    'form',
 	                    { onSubmit: this.onSubmit },
 	                    React.createElement('input', { type: 'text', className: 'form-control', ref: 'input', placeholder: ' Search for gif, Bill Murray, Batman, Smithsonian...' })
-	                )
-	            ),
-	            React.createElement(
-	                'div',
-	                { className: 'button-space' },
-	                React.createElement(
-	                    Link,
-	                    { to: '/savedposts' },
-	                    React.createElement(
-	                        'button',
-	                        { type: 'button', className: 'btn btn-default' },
-	                        'Saved Posts'
-	                    )
 	                )
 	            ),
 	            tumblrResults
@@ -29770,20 +29767,14 @@
 	var actions = __webpack_require__(236);
 	var connect = __webpack_require__(239).connect;
 	var postedData;
+	var LocalStorageMixin = __webpack_require__(272);
 	var black = "fa fa-heart pull-right black";
 	var red = "fa fa-heart pull-right red";
 	var SearchCard = React.createClass({
 	    displayName: 'SearchCard',
 	
-	    getInitialState: function getInitialState() {
-	        return {
-	            color: black
-	        };
-	    },
 	    saved: function saved() {
-	        if (this.state.color === black) {
-	            this.setState({ color: red });
-	        }
+	        this.setState({ color: 'Saved!' });
 	        console.log('from line six searchCard', this.props.src);
 	        this.props.dispatch(actions.postTumblrData(postedData = {
 	            postUrl: this.props.postUrl,
@@ -29794,9 +29785,6 @@
 	        }));
 	    },
 	    render: function render() {
-	        if (this.state.color === red) {
-	            this.setState({ color: red });
-	        }
 	        return React.createElement(
 	            'div',
 	            { className: 'card' },
@@ -29812,7 +29800,7 @@
 	                    'h4',
 	                    { className: 'card-title' },
 	                    this.props.blogName,
-	                    React.createElement('i', { className: this.state.color, 'aria-hidden': 'true', onClick: this.saved })
+	                    React.createElement('i', { onClick: this.saved, className: 'fa fa-heart pull-right red', 'aria-hidden': 'true' })
 	                ),
 	                React.createElement(
 	                    'p',
@@ -29838,19 +29826,214 @@
 /* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function(global, process) {'use strict';
+	var React = __webpack_require__(1);
+	var warn = __webpack_require__(273);
+	var hasLocalStorage = 'localStorage' in global;
+	var ls, testKey;
+	
+	if (hasLocalStorage) {
+	  testKey = 'react-localstorage.mixin.test-key';
+	  try {
+	    // Access to global `localStorage` property must be guarded as it
+	    // fails under iOS private session mode.
+	    ls = global.localStorage;
+	    ls.setItem(testKey, 'foo');
+	    ls.removeItem(testKey);
+	  } catch (e) {
+	    hasLocalStorage = false;
+	  }
+	}
+	
+	// Warn if localStorage cannot be found or accessed.
+	if (process.browser) {
+	  warn(
+	    hasLocalStorage,
+	    'localStorage not found. Component state will not be stored to localStorage.'
+	  );
+	}
+	
+	var Mixin = module.exports = {
+	  /**
+	   * Error checking. On update, ensure that the last state stored in localStorage is equal
+	   * to the state on the component. We skip the check the first time around as state is left
+	   * alone until mount to keep server rendering working.
+	   *
+	   * If it is not consistent, we know that someone else is modifying localStorage out from under us, so we throw
+	   * an error.
+	   *
+	   * There are a lot of ways this can happen, so it is worth throwing the error.
+	   */
+	  componentWillUpdate: function(nextProps, nextState) {
+	    if (!hasLocalStorage || !this.__stateLoadedFromLS) return;
+	    var key = getLocalStorageKey(this);
+	    if (key === false) return;
+	    var prevStoredState = ls.getItem(key);
+	    if (prevStoredState && process.env.NODE_ENV !== "production") {
+	      warn(
+	        prevStoredState === JSON.stringify(getSyncState(this, this.state)),
+	        'While component ' + getDisplayName(this) + ' was saving state to localStorage, ' +
+	        'the localStorage entry was modified by another actor. This can happen when multiple ' +
+	        'components are using the same localStorage key. Set the property `localStorageKey` ' +
+	        'on ' + getDisplayName(this) + '.'
+	      );
+	    }
+	    // Since setState() can't be called in CWU, it's a fine time to save the state.
+	    ls.setItem(key, JSON.stringify(getSyncState(this, nextState)));
+	  },
+	
+	  /**
+	   * Load data.
+	   * This seems odd to do this on componentDidMount, but it prevents server checksum errors.
+	   * This is because the server has no way to know what is in your localStorage. So instead
+	   * of breaking the checksum and causing a full rerender, we instead change the component after mount
+	   * for an efficient diff.
+	   */
+	  componentDidMount: function () {
+	    if (!hasLocalStorage) return;
+	    var me = this;
+	    loadStateFromLocalStorage(this, function() {
+	      // After setting state, mirror back to localstorage.
+	      // This prevents invariants if the developer has changed the initial state of the component.
+	      ls.setItem(getLocalStorageKey(me), JSON.stringify(getSyncState(me, me.state)));
+	    });
+	  }
+	};
+	
+	function loadStateFromLocalStorage(component, cb) {
+	  if (!ls) return;
+	  var key = getLocalStorageKey(component);
+	  if (key === false) return;
+	  var settingState = false;
+	  try {
+	    var storedState = JSON.parse(ls.getItem(key));
+	    if (storedState) {
+	      settingState = true;
+	      component.setState(storedState, done);
+	    }
+	  } catch(e) {
+	    if (console) console.warn("Unable to load state for", getDisplayName(component), "from localStorage.");
+	  }
+	  // If we didn't set state, run the callback right away.
+	  if (!settingState) done();
+	
+	  function done() {
+	    // Flag this component as loaded.
+	    component.__stateLoadedFromLS = true;
+	    cb();
+	  }
+	}
+	
+	function getDisplayName(component) {
+	  // at least, we cannot get displayname
+	  // via this.displayname in react 0.12
+	  return component.displayName || component.constructor.displayName || component.constructor.name;
+	}
+	
+	function getLocalStorageKey(component) {
+	  if (component.getLocalStorageKey) return component.getLocalStorageKey();
+	  if (component.props.localStorageKey === false) return false;
+	  if (typeof component.props.localStorageKey === 'function') return component.props.localStorageKey.call(component);
+	  return component.props.localStorageKey || getDisplayName(component) || 'react-localstorage';
+	}
+	
+	function getStateFilterKeys(component) {
+	  if (component.getStateFilterKeys) {
+	    return typeof component.getStateFilterKeys() === 'string' ?
+	      [component.getStateFilterKeys()] : component.getStateFilterKeys();
+	  }
+	  return typeof component.props.stateFilterKeys === 'string' ?
+	    [component.props.stateFilterKeys] : component.props.stateFilterKeys;
+	}
+	
+	/**
+	* Filters state to only save keys defined in stateFilterKeys.
+	* If stateFilterKeys is not set, returns full state.
+	*/
+	function getSyncState(component, state) {
+	  var stateFilterKeys = getStateFilterKeys(component);
+	  if (!stateFilterKeys) return state;
+	  var result = {};
+	  stateFilterKeys.forEach(function(sk) {
+	    for (var key in state) {
+	      if (state.hasOwnProperty(key) && sk === key) result[key] = state[key];
+	    }
+	  });
+	  return result;
+	}
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(3)))
+
+/***/ },
+/* 273 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2014 Facebook, Inc.
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the "License");
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 *
+	 * @providesModule warning
+	 */
+	
+	"use strict";
+	
+	/**
+	 * Similar to invariant but only logs a warning if the condition is not met.
+	 * This can be used to log issues in development environments in critical
+	 * paths. Removing the logging code for production environments will keep the
+	 * same logic and follow the same code paths.
+	 */
+	
+	var warning = function() {};
+	
+	if ("production" !== process.env.NODE_ENV) {
+	  warning = function(condition, format ) {var args=Array.prototype.slice.call(arguments,2);
+	    if (format === undefined) {
+	      throw new Error(
+	        '`warning(condition, format, ...args)` requires a warning ' +
+	        'message argument'
+	      );
+	    }
+	
+	    if (!condition) {
+	      var argIndex = 0;
+	      console.warn('Warning: ' + format.replace(/%s/g, function()  {return args[argIndex++];}));
+	    }
+	  };
+	}
+	
+	module.exports = warning;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 274 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
 	var redux = __webpack_require__(246);
 	var createStore = redux.createStore;
 	var applyMiddleware = redux.applyMiddleware;
-	var thunk = __webpack_require__(273).default;
+	var thunk = __webpack_require__(275).default;
 	
-	var reducers = __webpack_require__(274);
+	var reducers = __webpack_require__(276);
 	var store = createStore(reducers.appReducer, applyMiddleware(thunk));
 	module.exports = store;
 
 /***/ },
-/* 273 */
+/* 275 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29878,7 +30061,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 274 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

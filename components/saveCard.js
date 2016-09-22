@@ -5,11 +5,11 @@ var connect = require('react-redux').connect;
 var SaveCard = React.createClass({
     getInitialState: function(){
         return {
-            hide: 'card'
+            hide: 'save-card card'
         };
     },
     deleted: function(){
-        if (this.state.hide === 'card'){
+        if (this.state.hide === 'save-card card'){
             this.setState({hide: 'display-none'});
         }
         this.props.dispatch(actions.deleteDbData(this.props.id))
