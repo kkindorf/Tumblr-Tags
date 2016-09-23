@@ -7,7 +7,7 @@ var black = "fa fa-heart pull-right black";
 var red = "fa fa-heart pull-right red";
 var SearchCard = React.createClass({
     saved: function(){
-        this.setState({color:'Saved!'})
+
         console.log('from line six searchCard', this.props.src);
         this.props.dispatch(actions.postTumblrData(postedData = {
             postUrl: this.props.postUrl,

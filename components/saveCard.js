@@ -32,4 +32,4 @@ var SaveCard = React.createClass({
 
 var Container = connect()(SaveCard);
 module.exports = Container;
-module.exports = SaveCard;
+//module.exports = SaveCard;

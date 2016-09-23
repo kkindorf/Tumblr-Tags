@@ -59,8 +59,10 @@ var deleteCardFromDbSuccess = function(id){
 
 var DELETE_CARD_FROM_DB_ERROR = 'DELETE_CARD_FROM_DB_ERROR';
 var deleteCardFromDbError = function(error){
-    type: DELETE_CARD_FROM_DB_ERROR;
+    return{
+    type: DELETE_CARD_FROM_DB_ERROR,
     error: error
+    }
 }
 var rootUrl = 'https://serene-ridge-74209.herokuapp.com';
 var fetchTumblrData = function(query){
@@ -160,6 +162,8 @@ var deleteDbData = function(id){
 exports.deleteDbData = deleteDbData;
 exports.DELETE_CARD_FROM_DB_SUCCESS = DELETE_CARD_FROM_DB_SUCCESS;
 exports.DELETE_CARD_FROM_DB_ERROR = DELETE_CARD_FROM_DB_ERROR;
+exports.deleteCardFromDbSuccess = deleteCardFromDbSuccess;
+exports.deleteCardFromDbError = deleteCardFromDbError;
 exports.fetchDbData = fetchDbData;
 exports.fetchPostsFromDbError = fetchPostsFromDbError;
 exports.fetchPostsFromDbSuccess = fetchPostsFromDbSuccess;

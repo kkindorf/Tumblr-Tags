@@ -27223,8 +27223,10 @@
 	
 	var DELETE_CARD_FROM_DB_ERROR = 'DELETE_CARD_FROM_DB_ERROR';
 	var deleteCardFromDbError = function deleteCardFromDbError(error) {
-	    type: DELETE_CARD_FROM_DB_ERROR;
-	    error: error;
+	    return {
+	        type: DELETE_CARD_FROM_DB_ERROR,
+	        error: error
+	    };
 	};
 	var rootUrl = 'https://serene-ridge-74209.herokuapp.com';
 	var fetchTumblrData = function fetchTumblrData(query) {
@@ -29619,7 +29621,7 @@
 	};
 	var Container = connect(mapStateToProps)(SaveContainer);
 	module.exports = Container;
-	module.exports = SaveContainer;
+	//module.exports = SaveContainer;
 
 /***/ },
 /* 269 */
@@ -29680,7 +29682,7 @@
 	
 	var Container = connect()(SaveCard);
 	module.exports = Container;
-	module.exports = SaveCard;
+	//module.exports = SaveCard;
 
 /***/ },
 /* 270 */
@@ -29757,7 +29759,7 @@
 	
 	var Container = connect(mapStateToProps)(SearchContainer);
 	module.exports = Container;
-	module.exports = SearchContainer;
+	//module.exports = SearchContainer;
 
 /***/ },
 /* 271 */
@@ -29776,7 +29778,7 @@
 	    displayName: 'SearchCard',
 	
 	    saved: function saved() {
-	        this.setState({ color: 'Saved!' });
+	
 	        console.log('from line six searchCard', this.props.src);
 	        this.props.dispatch(actions.postTumblrData(postedData = {
 	            postUrl: this.props.postUrl,
