@@ -21502,7 +21502,7 @@
 	
 	var Container = connect()(Header);
 	module.exports = Container;
-	module.exports = Header;
+	//module.exports = Header;
 
 /***/ },
 /* 173 */
@@ -27315,6 +27315,8 @@
 	exports.deleteDbData = deleteDbData;
 	exports.DELETE_CARD_FROM_DB_SUCCESS = DELETE_CARD_FROM_DB_SUCCESS;
 	exports.DELETE_CARD_FROM_DB_ERROR = DELETE_CARD_FROM_DB_ERROR;
+	exports.deleteCardFromDbSuccess = deleteCardFromDbSuccess;
+	exports.deleteCardFromDbError = deleteCardFromDbError;
 	exports.fetchDbData = fetchDbData;
 	exports.fetchPostsFromDbError = fetchPostsFromDbError;
 	exports.fetchPostsFromDbSuccess = fetchPostsFromDbSuccess;
@@ -29824,7 +29826,7 @@
 	
 	var Container = connect(mapStateToProps)(SearchCard);
 	module.exports = Container;
-	module.exports = SearchCard;
+	//module.exports = SearchCard;
 
 /***/ },
 /* 272 */
