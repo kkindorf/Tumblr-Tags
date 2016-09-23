@@ -61,4 +61,4 @@ var mapStateToProps = function(state, props){
 
 var Container = connect(mapStateToProps)(SearchContainer)
 module.exports = Container;
-//module.exports = SearchContainer;
+module.exports = SearchContainer;
