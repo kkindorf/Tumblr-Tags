@@ -29619,6 +29619,7 @@
 	};
 	var Container = connect(mapStateToProps)(SaveContainer);
 	module.exports = Container;
+	module.exports = SaveContainer;
 
 /***/ },
 /* 269 */
@@ -29679,7 +29680,7 @@
 	
 	var Container = connect()(SaveCard);
 	module.exports = Container;
-	//module.exports = SaveCard;
+	module.exports = SaveCard;
 
 /***/ },
 /* 270 */
@@ -29756,6 +29757,7 @@
 	
 	var Container = connect(mapStateToProps)(SearchContainer);
 	module.exports = Container;
+	module.exports = SearchContainer;
 
 /***/ },
 /* 271 */
@@ -29820,7 +29822,7 @@
 	
 	var Container = connect(mapStateToProps)(SearchCard);
 	module.exports = Container;
-	//module.exports = SearchCard;
+	module.exports = SearchCard;
 
 /***/ },
 /* 272 */

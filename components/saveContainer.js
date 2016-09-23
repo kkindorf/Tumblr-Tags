@@ -48,3 +48,4 @@ var mapStateToProps = function(state, props){
 }
 var Container = connect(mapStateToProps)(SaveContainer)
 module.exports = Container;
+module.exports = SaveContainer;

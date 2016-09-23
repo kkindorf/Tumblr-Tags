@@ -41,4 +41,4 @@ var mapStateToProps = function(state, props){
 
 var Container = connect(mapStateToProps)(SearchCard);
 module.exports = Container;
-//module.exports = SearchCard;
+module.exports = SearchCard;
