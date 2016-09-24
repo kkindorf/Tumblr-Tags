@@ -15,6 +15,22 @@ describe('searchCard component', function(){
                                    summary = {summary}
                                    timestamp = {timestamp} />);
        var result = renderer.getRenderOutput();
-       //console.log(result)
+       result.type.should.equal('div');
+       result.props.className.should.equal('card');
+       console.log(result.props.children[2]);
+       var a = result.props.children[0];
+       a.type.should.equal('a');
+       a.props.children.type.should.equal('img');
+       var cardBlock = result.props.children[1];
+       cardBlock.type.should.equal('div');
+       cardBlock.props.className.should.equal('card-block');
+       var h4 = cardBlock.props.children[0];
+       h4.props.className.should.equal('card-title');
+       h4.props.children.should.have.length(2)
+       var p = cardBlock.props.children[1];
+       p.type.should.equal('p');
+       p.props.className.should.equal('card-text');
+       p.props.children.should.equal('this is a summery');
+       
    })
 })
