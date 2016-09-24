@@ -44,6 +44,7 @@
 }
 .card{
     max-width: 400px;
+    padding: 2%;
 }
 
 .save-card{
@@ -73,4 +74,13 @@ img{
 }
 .display-none{
     display: none;
+}
+@media screen and (max-width:480px) {
+ 
+    .card{
+    max-width: 300px;
+    padding: 3%;
+}
+
+   
 }
