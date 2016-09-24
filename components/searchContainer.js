@@ -1,5 +1,5 @@
 var React = require('react');
-var SearchCard = require('./searchCard');
+var SearchCard = require('./searchCard').ASearchCard;
 var actions = require('../actions');
 var connect = require('react-redux').connect;
 var router = require('react-router');
@@ -58,7 +58,8 @@ var mapStateToProps = function(state, props){
         tumblrDataResponse: state.tumblrDataResponse
     }
 }
-
-var Container = connect(mapStateToProps)(SearchContainer)
+exports.ASearchContainer = connect(mapStateToProps)(SearchContainer)
+exports.SearchContainer = SearchContainer;
+/*var Container = connect(mapStateToProps)(SearchContainer)
 module.exports = Container;
-//module.exports = SearchContainer;
+module.exports = SearchContainer;*/

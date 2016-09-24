@@ -8,3 +8,10 @@ addons:
     - mongodb-3.2-precise
     packages:
     - mongodb-org-server
+deploy:
+  provider: heroku
+  api_key:
+    secure: JsCc6giovMUM5KsN9ZUuOSFWfUp+HXHihpjIYhY++KHkkV5pw6ZMM/DJ18CoEINh1xYo7mKHQQBYYRE/Nwhj1WyfP9+avketQ/+vTlD5zqIiEeIq3ew7C5R3ylqo98F96CgFDJEg8SmiOLf/O4ub9n1Xezh5o9jB0M6kXlQZbWLV7l/08XnwlWsfBhDHLBgPDNUSxBgNQ/qi/ohtdlBTw3SydzSTD7iEtYG/f73dmTefF5/UYxz3W38U+7l/jT545uRg0+VnlxXGexa/6muOTzCL9+qoL1BPndGINGCjU5TAaAqPuK5N3RDXp2DtBVUUisGkg7sfOMyPad2U08Fub73MkB2LA64bRiDw4KC7T6VDy+U/4aKJ6Jdao/AUye8QXTZ5CWLEX4U/9QvbifGzX9HJBMwBLSAlTzq19AaemnmvCvV6PKA7iU0sUXIOS1DHsYYT60pW3RmoMF8zD7rZOAGCFfK6relsJRd6lQY4wrOMSG9dg1RTaBDmhzbwDg9d6AkBE3Vy5qE5QPg5VqJVdUpdn7FxM9anUrseCYauH2Zc6iPRSKq+WNg0ker9Mll8I0h3MKZsgjUY0NM1l3rW9TBO/3EF2yAlRDjy9YAQ5WRG48f7CUFBBWS6geig9w+UhSGK3mVxYvcUcNwv1Rs6orfzU4GFE0+VaqT7XnrdVa4=
+  app: safe-beach-22230
+  on:
+    repo: kkindorf/tumblr-tags

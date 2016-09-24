@@ -1,8 +1,8 @@
 var React = require('react');
 var TestUtils = require('react-addons-test-utils');
 var should = require('chai').should();
-var SaveContainer = require('../components/saveContainer');
-var SaveCard = require('../components/saveCard');
+var SaveContainer = require('../components/saveContainer').SaveContainer;
+var SaveCard = require('../components/saveCard').SaveCard;
 
 describe('saveContainer component', function(){
     it('renders a saveContainer component', function(){
@@ -21,7 +21,6 @@ describe('saveContainer component', function(){
          result.props.children[1].type.should.equal('div');
          result.props.children[1].props.className.should.equal('save-cards-flex');
          var saveCard = result.props.children[1].props.children[0];
-         saveCard.type.displayName.should.equal('SaveCard')
 
     })
 })

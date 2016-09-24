@@ -1,5 +1,5 @@
 var React = require('react');
-var SaveCard = require('./saveCard');
+var SaveCard = require('./saveCard').ASaveCard;
 var router = require('react-router');
 var Router = router.Router;
 var Route = router.Route;
@@ -46,6 +46,9 @@ var mapStateToProps = function(state, props){
         dbData: state.dbData
     }
 }
-var Container = connect(mapStateToProps)(SaveContainer)
+exports.ASaveContainer = connect(mapStateToProps)(SaveContainer)
+exports.SaveContainer = SaveContainer;
+
+/*var Container = connect(mapStateToProps)(SaveContainer)
 module.exports = Container;
-//module.exports = SaveContainer;
+module.exports = SaveContainer;*/

@@ -1,7 +1,7 @@
 var React = require('react');
 var TestUtils = require('react-addons-test-utils');
 var should = require('chai').should();
-var SaveCard = require('../components/saveCard');
+var SaveCard = require('../components/saveCard').SaveCard;
 
 describe('saveCard component', function(){
    it('renders a save card component', function(){

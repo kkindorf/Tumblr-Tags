@@ -1,7 +1,7 @@
 var React = require('react');
 var TestUtils = require('react-addons-test-utils');
 var should = require('chai').should();
-var SearchCard = require('../components/searchCard');
+var SearchCard = require('../components/searchCard').SearchCard
 
 describe('searchCard component', function(){
    it('renders a search card component', function(){

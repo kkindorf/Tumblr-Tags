@@ -1,8 +1,8 @@
 var React = require('react');
 var TestUtils = require('react-addons-test-utils');
 var should = require('chai').should();
-var SearchContainer = require('../components/searchContainer');
-var SearchCard = require('../components/searchCard');
+var SearchContainer = require('../components/searchContainer').SearchContainer;
+var SearchCard = require('../components/searchCard').SearchCard;
 var results = [<SearchCard />, <SearchCard />]
 describe('Search Container', function(){
     it('renders a search container component', function(){

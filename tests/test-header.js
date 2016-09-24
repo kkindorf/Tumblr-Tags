@@ -1,7 +1,7 @@
 var React = require('react');
 var TestUtils = require('react-addons-test-utils');
 var should = require('chai').should();
-var Header = require('../components/header');
+var Header = require('../components/header').Header;
 
 describe(' header component', function(){
     it('renders a header component with button and search form', function(){
