@@ -55,4 +55,5 @@ describe('main app actions', function(){
             error: 'this is an error'
         })
     })
+    
 })
