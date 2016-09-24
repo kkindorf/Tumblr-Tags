@@ -52,6 +52,7 @@
     "expect-immutable": "0.0.3",
     "immutable": "^3.8.1",
     "mocha": "^3.0.2",
-    "react-addons-test-utils": "^15.3.1"
+    "react-addons-test-utils": "^15.3.1",
+    "redux-test-reducer": "^0.1.0"
   }
 }
