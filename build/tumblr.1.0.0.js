@@ -29779,8 +29779,15 @@
 	var SearchCard = React.createClass({
 	    displayName: 'SearchCard',
 	
+	    getInitialState: function getInitialState() {
+	        return {
+	            color: black
+	        };
+	    },
 	    saved: function saved() {
-	
+	        if (this.state.color === black) {
+	            this.setState({ color: red });
+	        }
 	        console.log('from line six searchCard', this.props.src);
 	        this.props.dispatch(actions.postTumblrData(postedData = {
 	            postUrl: this.props.postUrl,
@@ -29806,7 +29813,7 @@
 	                    'h4',
 	                    { className: 'card-title' },
 	                    this.props.blogName,
-	                    React.createElement('i', { onClick: this.saved, className: 'fa fa-heart pull-right red', 'aria-hidden': 'true' })
+	                    React.createElement('i', { onClick: this.saved, className: this.state.color, 'aria-hidden': 'true' })
 	                ),
 	                React.createElement(
 	                    'p',
