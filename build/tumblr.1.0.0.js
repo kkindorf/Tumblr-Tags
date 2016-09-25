@@ -27230,10 +27230,10 @@
 	        error: error
 	    };
 	};
-	var rootUrl = 'https://serene-ridge-74209.herokuapp.com';
+	var rootUrl = 'https://tumblr-api-kkindorf.c9users.io';
 	var fetchTumblrData = function fetchTumblrData(query) {
 	    return function (dispatch) {
-	        var url = rootUrl + '/search?' + query;
+	        var url = rootUrl + '/search?q=' + query;
 	        /*var url = 'https://tumblr-api-kkindorf.c9users.io/status';*/
 	        return fetch(url).then(function (response) {
 	            if (response.state < 200 || response.status >= 300) {
@@ -27272,9 +27272,12 @@
 	    };
 	};
 	
-	var fetchDbData = function fetchDbData(dbData) {
+	var fetchDbData = function fetchDbData(skip) {
+	    skip || (skip = 0);
 	    return function (dispatch) {
-	        var url = rootUrl + '/saved-cards';
+	        console.log(skip);
+	        var url = rootUrl + '/saved-cards?skip=' + skip;
+	
 	        return fetch(url).then(function (response) {
 	            if (response.state < 200 || response.status >= 300) {
 	                var error = new Error(response.statusText);
@@ -29573,26 +29576,48 @@
 	var actions = __webpack_require__(236);
 	var connect = __webpack_require__(239).connect;
 	var Link = router.Link;
-	var dbResults = [];
-	var itemId = '';
+	
 	var SaveContainer = React.createClass({
 	    displayName: 'SaveContainer',
 	
+	    getInitialState: function getInitialState() {
+	        return {
+	            hide: "save-cards-flex"
+	        };
+	    },
 	    componentDidMount: function componentDidMount() {
-	        this.props.dispatch(actions.fetchDbData(this.props.dbData));
+	        this.props.dispatch(actions.fetchDbData(this.props.dbData.skip));
+	    },
+	    getNext: function getNext() {
+	        if (this.props.dbData.skip >= this.props.dbData.count - 1) {
+	            return false;
+	        }
+	
+	        this.props.dispatch(actions.fetchDbData(this.props.dbData.skip + 1));
+	    },
+	    getPrev: function getPrev() {
+	        if (this.props.dbData.skip < 1) {
+	            return false;
+	        }
+	        this.props.dispatch(actions.fetchDbData(this.props.dbData.skip - 1));
+	    },
+	    deleted: function deleted() {
+	        this.props.dispatch(actions.deleteDbData(this.props.dbData.savedCards[0]._id));
+	        if (this.props.dbData.count === 1) {
+	            this.props.dispatch(actions.deleteDbData(this.props.dbData.savedCards[0]._id));
+	            this.setState({ hide: 'display-none' });
+	        }
+	        if (this.props.dbData.count > 1 && this.props.dbData.skip >= 1) {
+	            this.props.dispatch(actions.fetchDbData(this.props.dbData.skip - 1));
+	        }
+	        if (this.props.dbData.skip === 0 && this.props.dbData.count >= 1) {
+	            this.props.dispatch(actions.fetchDbData(this.props.dbData.skip + 1));
+	        }
+	
+	        //var newSkip = Math.max(this.props.dbData.skip - 1, 0)
 	    },
 	
 	    render: function render() {
-	
-	        dbResults = this.props.dbData.map(function (item, id) {
-	            itemId = item._id;
-	            //console.log('from line 17 in save container', itemId)
-	            return React.createElement(SaveCard, { blogName: item.blogName,
-	                src: item.src,
-	                summary: item.summary,
-	                postUrl: item.postUrl,
-	                id: itemId });
-	        });
 	        return React.createElement(
 	            'div',
 	            null,
@@ -29611,8 +29636,28 @@
 	            ),
 	            React.createElement(
 	                'div',
-	                { className: 'save-cards-flex' },
-	                dbResults
+	                { className: this.state.hide },
+	                React.createElement(SaveCard, {
+	                    blogName: this.props.dbData.savedCards[0].blogName,
+	                    src: this.props.dbData.savedCards[0].src,
+	                    summary: this.props.dbData.savedCards[0].summary,
+	                    postUrl: this.props.dbData.savedCards[0].postUrl,
+	                    id: this.props.dbData.savedCards[0]._id,
+	                    onClick: this.deleted })
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: 'buttons' },
+	                React.createElement(
+	                    'button',
+	                    { className: 'btn btn-default pull-left', onClick: this.getPrev, id: 'getPrev', role: 'button' },
+	                    'Previous'
+	                ),
+	                React.createElement(
+	                    'button',
+	                    { className: 'btn btn-default pull-right', onClick: this.getNext, id: 'getNext', role: 'button' },
+	                    'Next'
+	                )
 	            )
 	        );
 	    }
@@ -29643,21 +29688,11 @@
 	var SaveCard = React.createClass({
 	    displayName: 'SaveCard',
 	
-	    getInitialState: function getInitialState() {
-	        return {
-	            hide: 'save-card card'
-	        };
-	    },
-	    deleted: function deleted() {
-	        if (this.state.hide === 'save-card card') {
-	            this.setState({ hide: 'display-none' });
-	        }
-	        this.props.dispatch(actions.deleteDbData(this.props.id));
-	    },
+	
 	    render: function render() {
 	        return React.createElement(
 	            'div',
-	            { className: this.state.hide },
+	            { className: 'save-card card' },
 	            React.createElement(
 	                'a',
 	                { href: this.props.postUrl },
@@ -29670,7 +29705,7 @@
 	                    'h4',
 	                    { className: 'card-title' },
 	                    this.props.blogName,
-	                    React.createElement('i', { className: 'fa fa-trash pull-right', 'aria-hidden': 'true', onClick: this.deleted })
+	                    React.createElement('i', { className: 'fa fa-trash pull-right', 'aria-hidden': 'true', onClick: this.props.onClick })
 	                ),
 	                React.createElement(
 	                    'p',
@@ -29708,10 +29743,13 @@
 	var Route = router.Route;
 	var Link = router.Link;
 	var tumblrResults = [];
-	
+	var hideButton;
 	var SearchContainer = React.createClass({
 	    displayName: 'SearchContainer',
 	
+	    componentDidMount: function componentDidMount() {
+	        this.props.dispatch(actions.fetchDbData(this.props.dbData.skip));
+	    },
 	    onSubmit: function onSubmit(e) {
 	        e.preventDefault();
 	        var query = this.refs.input.value;
@@ -29721,6 +29759,7 @@
 	    },
 	
 	    render: function render() {
+	
 	        tumblrResults = this.props.tumblrDataResponse.map(function (item, id) {
 	            console.log(item.post_url);
 	            if (!item.photos) {
@@ -29738,12 +29777,16 @@
 	            'div',
 	            { className: 'search-cards-flex' },
 	            React.createElement(
-	                Link,
-	                { to: '/savedposts' },
+	                'div',
+	                { className: hideButton },
 	                React.createElement(
-	                    'button',
-	                    { type: 'button', onClick: this.onClick, className: 'btn btn-default' },
-	                    'Saved Posts'
+	                    Link,
+	                    { to: '/savedposts' },
+	                    React.createElement(
+	                        'button',
+	                        { type: 'button', onClick: this.onClick, className: 'btn btn-default' },
+	                        'Saved Posts'
+	                    )
 	                )
 	            ),
 	            React.createElement(
@@ -29762,7 +29805,8 @@
 	
 	var mapStateToProps = function mapStateToProps(state, props) {
 	    return {
-	        tumblrDataResponse: state.tumblrDataResponse
+	        tumblrDataResponse: state.tumblrDataResponse,
+	        dbData: state.dbData
 	    };
 	};
 	exports.ASearchContainer = connect(mapStateToProps)(SearchContainer);
@@ -30094,7 +30138,8 @@
 	var initialAppState = {
 	     tumblrDataResponse: [],
 	     postedData: {},
-	     dbData: []
+	     dbData: {},
+	     loading: true
 	
 	};
 	
@@ -30120,8 +30165,9 @@
 	     }
 	     if (action.type === actions.FETCH_POSTS_FROM_DB_SUCCESS) {
 	          //console.log('hello?')
-	          //console.log('from line 31 in reducer', action.dbData);
-	          var updatedDbData = Object.assign({}, state, { dbData: action.dbData });
+	          console.log('from line 31 in reducer', action.dbData);
+	
+	          var updatedDbData = Object.assign({}, state, { dbData: action.dbData, loading: false });
 	          return updatedDbData;
 	     }
 	     if (action.type === actions.FETCH_POSTS_FROM_DB_ERROR) {

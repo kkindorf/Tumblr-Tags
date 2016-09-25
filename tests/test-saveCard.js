@@ -18,7 +18,6 @@ describe('saveCard component', function(){
         var result = renderer.getRenderOutput();
        result.type.should.equal('div');
        result.props.className.should.equal('save-card card');
-       console.log(result.props.children[2]);
        var a = result.props.children[0];
        a.type.should.equal('a');
        a.props.children.type.should.equal('img');

@@ -3,7 +3,8 @@ var actions = require('./actions');
 var initialAppState = {
 	tumblrDataResponse: [],
 	postedData: {},
-	dbData: []
+	dbData: {},
+	loading: true
     
 }
 
@@ -29,8 +30,9 @@ var appReducer = function(state, action){
      }
      if(action.type === actions.FETCH_POSTS_FROM_DB_SUCCESS){
           //console.log('hello?')
-          //console.log('from line 31 in reducer', action.dbData);
-          var updatedDbData = Object.assign({}, state, {dbData: action.dbData});
+          console.log('from line 31 in reducer', action.dbData);
+          
+          var updatedDbData = Object.assign({}, state, {dbData: action.dbData, loading: false});
           return updatedDbData;
      }
      if(action.type === actions.FETCH_POSTS_FROM_DB_ERROR){

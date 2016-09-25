@@ -50,22 +50,43 @@
 .save-card{
     margin: 2% !important;
     padding: 2% !important;
-    max-width: 250px !important; 
+    max-width: 400px !important; 
+    
 }
 img{
     width: 100%;
 
 }
+.loader{
+ 
+  bottom: 0;
+  height: 100px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  color: white;
+}
+.fa-refresh{
+    color: black;
+}
+
 .card-block{
     width:100%;
 }
 .fa{
-    padding-left: 10%
+    padding-left: 10%;
+    cursor: pointer;
+    cursor: hand;
 }
 .card-text{
     width: 80% !important;
 }
-
+.buttons{
+    padding:5%;
+}
 .black {
     color: black;
 }
@@ -75,11 +96,18 @@ img{
 .display-none{
     display: none;
 }
+
 @media screen and (max-width:480px) {
  
     .card{
-    max-width: 300px;
+    max-width: 375px;
     padding: 3%;
+}
+.save-card{
+    margin: 2%;
+    padding: 2%;
+    max-width: 375px; 
+    
 }
 
    
