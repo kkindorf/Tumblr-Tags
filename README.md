@@ -37,7 +37,7 @@ format and they'll be able to see comments by users about that image.
 
 ##Screenshots
 
-![alt tag](http://i.imgur.com/sD83ohg.png)
+![alt tag](http://i.imgur.com/fvyfVR3.png)
 This is a screenshot of the saveContainer for the application. As you can see I'm displaying the images in rows using flexbos for centering and 
 creating space between each image. 
 
