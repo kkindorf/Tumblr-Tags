@@ -68,7 +68,6 @@ var rootUrl = 'https://serene-ridge-74209.herokuapp.com';
 var fetchTumblrData = function(query){
     return function(dispatch){
         var url = rootUrl+'/search?'+query;
-        /*var url = 'https://tumblr-api-kkindorf.c9users.io/status';*/
         return fetch(url)
         .then(function(response){
                if(response.state < 200 || response.status >= 300){
@@ -80,8 +79,6 @@ var fetchTumblrData = function(query){
             return response.json();
         })
         .then(function(tumblrData){
-            console.log(tumblrData)
-            console.log(tumblrData.response.length)
             return dispatch(fetchTumblrSuccess(tumblrData.response));
         })
         .catch(function(error){
@@ -101,11 +98,9 @@ var postTumblrData = function(postedData){
             body: JSON.stringify({postedData})
         })
         .then(function(res){
-            console.log('logging response inside fetch post', res)
             return dispatch(postTumblrSuccess(postedData))
         })
         .catch(function(error){
-            console.log('logging error inside fetch post', error)
             return dispatch(postTumblrError(postedData, error))
         })
     }
@@ -124,7 +119,6 @@ var fetchDbData = function(dbData){
             return response.json();
         })
         .then(function(dbData){
-            console.log('from line 125 in fetch db', dbData)
             return dispatch(fetchPostsFromDbSuccess(dbData))
         })
         .catch(function(error){
@@ -150,7 +144,6 @@ var deleteDbData = function(id){
             return response.json();
         })
         .then(function(id){
-            console.log('from line 144 in delete fetch', id)
             return dispatch(deleteCardFromDbSuccess(id))
         })
         .catch(function(error){

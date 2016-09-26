@@ -2,7 +2,6 @@ var React= require('react');
 var actions = require('../actions')
 var connect = require('react-redux').connect;
 var postedData;
-var LocalStorageMixin = require('react-localstorage');
 var black = "fa fa-heart pull-right black";
 var red = "fa fa-heart pull-right red";
 var SearchCard = React.createClass({
@@ -15,7 +14,6 @@ var SearchCard = React.createClass({
          if (this.state.color === black){
             this.setState({color: red});
         }
-        console.log('from line six searchCard', this.props.src);
         this.props.dispatch(actions.postTumblrData(postedData = {
             postUrl: this.props.postUrl,
             blogName: this.props.blogName,
@@ -48,6 +46,4 @@ var mapStateToProps = function(state, props){
 
 exports.ASearchCard = connect(mapStateToProps)(SearchCard)
 exports.SearchCard = SearchCard;
-/*var Container = connect(mapStateToProps)(SearchCard);
-module.exports = Container;
-module.exports = SearchCard;*/
+

@@ -17,7 +17,6 @@ var SaveContainer = React.createClass({
         
         dbResults = this.props.dbData.map(function(item, id){
             itemId = item._id;
-            //console.log('from line 17 in save container', itemId)
                 return (
                     <SaveCard blogName = {item.blogName}
                             src = {item.src}  
@@ -48,7 +47,3 @@ var mapStateToProps = function(state, props){
 }
 exports.ASaveContainer = connect(mapStateToProps)(SaveContainer)
 exports.SaveContainer = SaveContainer;
-
-/*var Container = connect(mapStateToProps)(SaveContainer)
-module.exports = Container;
-module.exports = SaveContainer;*/

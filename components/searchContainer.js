@@ -12,14 +12,12 @@ var SearchContainer = React.createClass({
     onSubmit: function(e){
         e.preventDefault();
         var query = this.refs.input.value;
-        console.log(query)
         this.props.dispatch(actions.fetchTumblrData(query))
        this.refs.input.value ='';
     },
     
     render: function(){
         tumblrResults = this.props.tumblrDataResponse.map(function(item, id){
-            console.log(item.post_url)
             if(!item.photos){
                 return;
             }else{
@@ -60,6 +58,3 @@ var mapStateToProps = function(state, props){
 }
 exports.ASearchContainer = connect(mapStateToProps)(SearchContainer)
 exports.SearchContainer = SearchContainer;
-/*var Container = connect(mapStateToProps)(SearchContainer)
-module.exports = Container;
-module.exports = SearchContainer;*/

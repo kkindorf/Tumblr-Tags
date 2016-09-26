@@ -57,7 +57,7 @@
 	var hashHistory = router.hashHistory;
 	var IndexRoute = router.IndexRoute;
 	var Provider = __webpack_require__(239).Provider;
-	var store = __webpack_require__(274);
+	var store = __webpack_require__(272);
 	var actions = __webpack_require__(236);
 	var connect = __webpack_require__(239).connect;
 	
@@ -21502,9 +21502,6 @@
 	
 	exports.Header = connect()(Header);
 	exports.Header = Header;
-	/*var Container = connect()(Header);
-	module.exports = Container;
-	module.exports = Header;*/
 
 /***/ },
 /* 173 */
@@ -27234,7 +27231,6 @@
 	var fetchTumblrData = function fetchTumblrData(query) {
 	    return function (dispatch) {
 	        var url = rootUrl + '/search?' + query;
-	        /*var url = 'https://tumblr-api-kkindorf.c9users.io/status';*/
 	        return fetch(url).then(function (response) {
 	            if (response.state < 200 || response.status >= 300) {
 	                var error = new Error(response.statusText);
@@ -27244,8 +27240,6 @@
 	
 	            return response.json();
 	        }).then(function (tumblrData) {
-	            console.log(tumblrData);
-	            console.log(tumblrData.response.length);
 	            return dispatch(fetchTumblrSuccess(tumblrData.response));
 	        }).catch(function (error) {
 	            return dispatch(fetchTumblrError(error));
@@ -27263,10 +27257,8 @@
 	            },
 	            body: JSON.stringify({ postedData: postedData })
 	        }).then(function (res) {
-	            console.log('logging response inside fetch post', res);
 	            return dispatch(postTumblrSuccess(postedData));
 	        }).catch(function (error) {
-	            console.log('logging error inside fetch post', error);
 	            return dispatch(postTumblrError(postedData, error));
 	        });
 	    };
@@ -27283,7 +27275,6 @@
 	            }
 	            return response.json();
 	        }).then(function (dbData) {
-	            console.log('from line 125 in fetch db', dbData);
 	            return dispatch(fetchPostsFromDbSuccess(dbData));
 	        }).catch(function (error) {
 	            return dispatch(fetchPostsFromDbError(error));
@@ -27306,7 +27297,6 @@
 	            }
 	            return response.json();
 	        }).then(function (id) {
-	            console.log('from line 144 in delete fetch', id);
 	            return dispatch(deleteCardFromDbSuccess(id));
 	        }).catch(function (error) {
 	            return dispatch(deleteCardFromDbError(error));
@@ -29586,7 +29576,6 @@
 	
 	        dbResults = this.props.dbData.map(function (item, id) {
 	            itemId = item._id;
-	            //console.log('from line 17 in save container', itemId)
 	            return React.createElement(SaveCard, { blogName: item.blogName,
 	                src: item.src,
 	                summary: item.summary,
@@ -29625,10 +29614,6 @@
 	};
 	exports.ASaveContainer = connect(mapStateToProps)(SaveContainer);
 	exports.SaveContainer = SaveContainer;
-	
-	/*var Container = connect(mapStateToProps)(SaveContainer)
-	module.exports = Container;
-	module.exports = SaveContainer;*/
 
 /***/ },
 /* 269 */
@@ -29689,9 +29674,6 @@
 	
 	exports.ASaveCard = connect()(SaveCard);
 	exports.SaveCard = SaveCard;
-	/*var Container = connect()(SaveCard);
-	module.exports = Container;
-	module.exports = SaveCard;*/
 
 /***/ },
 /* 270 */
@@ -29715,14 +29697,12 @@
 	    onSubmit: function onSubmit(e) {
 	        e.preventDefault();
 	        var query = this.refs.input.value;
-	        console.log(query);
 	        this.props.dispatch(actions.fetchTumblrData(query));
 	        this.refs.input.value = '';
 	    },
 	
 	    render: function render() {
 	        tumblrResults = this.props.tumblrDataResponse.map(function (item, id) {
-	            console.log(item.post_url);
 	            if (!item.photos) {
 	                return;
 	            } else {
@@ -29767,9 +29747,6 @@
 	};
 	exports.ASearchContainer = connect(mapStateToProps)(SearchContainer);
 	exports.SearchContainer = SearchContainer;
-	/*var Container = connect(mapStateToProps)(SearchContainer)
-	module.exports = Container;
-	module.exports = SearchContainer;*/
 
 /***/ },
 /* 271 */
@@ -29781,7 +29758,6 @@
 	var actions = __webpack_require__(236);
 	var connect = __webpack_require__(239).connect;
 	var postedData;
-	var LocalStorageMixin = __webpack_require__(272);
 	var black = "fa fa-heart pull-right black";
 	var red = "fa fa-heart pull-right red";
 	var SearchCard = React.createClass({
@@ -29796,7 +29772,6 @@
 	        if (this.state.color === black) {
 	            this.setState({ color: red });
 	        }
-	        console.log('from line six searchCard', this.props.src);
 	        this.props.dispatch(actions.postTumblrData(postedData = {
 	            postUrl: this.props.postUrl,
 	            blogName: this.props.blogName,
@@ -29841,207 +29816,9 @@
 	
 	exports.ASearchCard = connect(mapStateToProps)(SearchCard);
 	exports.SearchCard = SearchCard;
-	/*var Container = connect(mapStateToProps)(SearchCard);
-	module.exports = Container;
-	module.exports = SearchCard;*/
 
 /***/ },
 /* 272 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global, process) {'use strict';
-	var React = __webpack_require__(1);
-	var warn = __webpack_require__(273);
-	var hasLocalStorage = 'localStorage' in global;
-	var ls, testKey;
-	
-	if (hasLocalStorage) {
-	  testKey = 'react-localstorage.mixin.test-key';
-	  try {
-	    // Access to global `localStorage` property must be guarded as it
-	    // fails under iOS private session mode.
-	    ls = global.localStorage;
-	    ls.setItem(testKey, 'foo');
-	    ls.removeItem(testKey);
-	  } catch (e) {
-	    hasLocalStorage = false;
-	  }
-	}
-	
-	// Warn if localStorage cannot be found or accessed.
-	if (process.browser) {
-	  warn(
-	    hasLocalStorage,
-	    'localStorage not found. Component state will not be stored to localStorage.'
-	  );
-	}
-	
-	var Mixin = module.exports = {
-	  /**
-	   * Error checking. On update, ensure that the last state stored in localStorage is equal
-	   * to the state on the component. We skip the check the first time around as state is left
-	   * alone until mount to keep server rendering working.
-	   *
-	   * If it is not consistent, we know that someone else is modifying localStorage out from under us, so we throw
-	   * an error.
-	   *
-	   * There are a lot of ways this can happen, so it is worth throwing the error.
-	   */
-	  componentWillUpdate: function(nextProps, nextState) {
-	    if (!hasLocalStorage || !this.__stateLoadedFromLS) return;
-	    var key = getLocalStorageKey(this);
-	    if (key === false) return;
-	    var prevStoredState = ls.getItem(key);
-	    if (prevStoredState && process.env.NODE_ENV !== "production") {
-	      warn(
-	        prevStoredState === JSON.stringify(getSyncState(this, this.state)),
-	        'While component ' + getDisplayName(this) + ' was saving state to localStorage, ' +
-	        'the localStorage entry was modified by another actor. This can happen when multiple ' +
-	        'components are using the same localStorage key. Set the property `localStorageKey` ' +
-	        'on ' + getDisplayName(this) + '.'
-	      );
-	    }
-	    // Since setState() can't be called in CWU, it's a fine time to save the state.
-	    ls.setItem(key, JSON.stringify(getSyncState(this, nextState)));
-	  },
-	
-	  /**
-	   * Load data.
-	   * This seems odd to do this on componentDidMount, but it prevents server checksum errors.
-	   * This is because the server has no way to know what is in your localStorage. So instead
-	   * of breaking the checksum and causing a full rerender, we instead change the component after mount
-	   * for an efficient diff.
-	   */
-	  componentDidMount: function () {
-	    if (!hasLocalStorage) return;
-	    var me = this;
-	    loadStateFromLocalStorage(this, function() {
-	      // After setting state, mirror back to localstorage.
-	      // This prevents invariants if the developer has changed the initial state of the component.
-	      ls.setItem(getLocalStorageKey(me), JSON.stringify(getSyncState(me, me.state)));
-	    });
-	  }
-	};
-	
-	function loadStateFromLocalStorage(component, cb) {
-	  if (!ls) return;
-	  var key = getLocalStorageKey(component);
-	  if (key === false) return;
-	  var settingState = false;
-	  try {
-	    var storedState = JSON.parse(ls.getItem(key));
-	    if (storedState) {
-	      settingState = true;
-	      component.setState(storedState, done);
-	    }
-	  } catch(e) {
-	    if (console) console.warn("Unable to load state for", getDisplayName(component), "from localStorage.");
-	  }
-	  // If we didn't set state, run the callback right away.
-	  if (!settingState) done();
-	
-	  function done() {
-	    // Flag this component as loaded.
-	    component.__stateLoadedFromLS = true;
-	    cb();
-	  }
-	}
-	
-	function getDisplayName(component) {
-	  // at least, we cannot get displayname
-	  // via this.displayname in react 0.12
-	  return component.displayName || component.constructor.displayName || component.constructor.name;
-	}
-	
-	function getLocalStorageKey(component) {
-	  if (component.getLocalStorageKey) return component.getLocalStorageKey();
-	  if (component.props.localStorageKey === false) return false;
-	  if (typeof component.props.localStorageKey === 'function') return component.props.localStorageKey.call(component);
-	  return component.props.localStorageKey || getDisplayName(component) || 'react-localstorage';
-	}
-	
-	function getStateFilterKeys(component) {
-	  if (component.getStateFilterKeys) {
-	    return typeof component.getStateFilterKeys() === 'string' ?
-	      [component.getStateFilterKeys()] : component.getStateFilterKeys();
-	  }
-	  return typeof component.props.stateFilterKeys === 'string' ?
-	    [component.props.stateFilterKeys] : component.props.stateFilterKeys;
-	}
-	
-	/**
-	* Filters state to only save keys defined in stateFilterKeys.
-	* If stateFilterKeys is not set, returns full state.
-	*/
-	function getSyncState(component, state) {
-	  var stateFilterKeys = getStateFilterKeys(component);
-	  if (!stateFilterKeys) return state;
-	  var result = {};
-	  stateFilterKeys.forEach(function(sk) {
-	    for (var key in state) {
-	      if (state.hasOwnProperty(key) && sk === key) result[key] = state[key];
-	    }
-	  });
-	  return result;
-	}
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(3)))
-
-/***/ },
-/* 273 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2014 Facebook, Inc.
-	 *
-	 * Licensed under the Apache License, Version 2.0 (the "License");
-	 * you may not use this file except in compliance with the License.
-	 * You may obtain a copy of the License at
-	 *
-	 * http://www.apache.org/licenses/LICENSE-2.0
-	 *
-	 * Unless required by applicable law or agreed to in writing, software
-	 * distributed under the License is distributed on an "AS IS" BASIS,
-	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	 * See the License for the specific language governing permissions and
-	 * limitations under the License.
-	 *
-	 * @providesModule warning
-	 */
-	
-	"use strict";
-	
-	/**
-	 * Similar to invariant but only logs a warning if the condition is not met.
-	 * This can be used to log issues in development environments in critical
-	 * paths. Removing the logging code for production environments will keep the
-	 * same logic and follow the same code paths.
-	 */
-	
-	var warning = function() {};
-	
-	if ("production" !== process.env.NODE_ENV) {
-	  warning = function(condition, format ) {var args=Array.prototype.slice.call(arguments,2);
-	    if (format === undefined) {
-	      throw new Error(
-	        '`warning(condition, format, ...args)` requires a warning ' +
-	        'message argument'
-	      );
-	    }
-	
-	    if (!condition) {
-	      var argIndex = 0;
-	      console.warn('Warning: ' + format.replace(/%s/g, function()  {return args[argIndex++];}));
-	    }
-	  };
-	}
-	
-	module.exports = warning;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ },
-/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30049,14 +29826,14 @@
 	var redux = __webpack_require__(246);
 	var createStore = redux.createStore;
 	var applyMiddleware = redux.applyMiddleware;
-	var thunk = __webpack_require__(275).default;
+	var thunk = __webpack_require__(273).default;
 	
-	var reducers = __webpack_require__(276);
+	var reducers = __webpack_require__(274);
 	var store = createStore(reducers.appReducer, applyMiddleware(thunk));
 	module.exports = store;
 
 /***/ },
-/* 275 */
+/* 273 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30084,7 +29861,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 276 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30101,31 +29878,24 @@
 	var appReducer = function appReducer(state, action) {
 	     state = state || initialAppState;
 	     if (action.type === actions.FETCH_TUMBLR_SUCCESS) {
-	          console.log('from line 11 in reducer', action.tumblrDataResponse);
 	          var updatedTumblrDataResponse = Object.assign({}, state, { tumblrDataResponse: action.tumblrDataResponse });
 	          return updatedTumblrDataResponse;
 	     }
 	     if (action.type === actions.FETCH_TUMBLR_ERROR) {
-	          console.log('from line 17 in reducer', action.error);
 	          throw new Error('the data from tumblr could not be retrieved', action.error);
 	     }
 	     if (action.type === actions.POST_TUMBLR_SUCCESS) {
-	          console.log('from line 21 in reducer', action.postedData);
 	          var updatedPostedData = Object.assign({}, state, { postedData: action.postedData });
 	          return updatedPostedData;
 	     }
 	     if (action.type === actions.POST_TUMBLR_ERROR) {
-	          console.log('from line 27 in reducer', action.error);
 	          throw new Error('the data from the database could not be posted', action.error);
 	     }
 	     if (action.type === actions.FETCH_POSTS_FROM_DB_SUCCESS) {
-	          //console.log('hello?')
-	          //console.log('from line 31 in reducer', action.dbData);
 	          var updatedDbData = Object.assign({}, state, { dbData: action.dbData });
 	          return updatedDbData;
 	     }
 	     if (action.type === actions.FETCH_POSTS_FROM_DB_ERROR) {
-	          console.log(action.error);
 	          throw new Error('the data could not be retrieved from the database', action.error);
 	     }
 	     if (action.type === actions.DELETE_CARD_FROM_DB_SUCCESS) {

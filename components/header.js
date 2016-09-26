@@ -28,6 +28,3 @@ var Header = React.createClass({
 
 exports.Header = connect()(Header)
 exports.Header = Header;
-/*var Container = connect()(Header);
-module.exports = Container;
-module.exports = Header;*/
