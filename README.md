@@ -37,11 +37,11 @@ format and they'll be able to see comments by users about that image.
 
 ##Screenshots
 
-![alt tag](http://imgur.com/fvyfVR3)
+![alt tag](http://i.imgur.com/sD83ohg.png)
 This is a screenshot of the saveContainer for the application. As you can see I'm displaying the images in rows using flexbos for centering and 
 creating space between each image. 
 
-![alt tag](http://imgur.com/sD83ohg)
+![alt tag](http://i.imgur.com/sD83ohg.png)
 This is a screenshot of the application inside the searchContainer component. The images are slightly larger so I had to zoom out to get
 a decent shot of what is going on in the component. I'm using flexbox for this as well but instead of using rows I'm putting everything
 into a single centered column. 
