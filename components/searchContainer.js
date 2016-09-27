@@ -22,7 +22,8 @@ var SearchContainer = React.createClass({
                 return;
             }else{
                 return (
-                    <SearchCard blogName = {item.blog_name}
+                    <SearchCard key={id}
+                            blogName = {item.blog_name}
                             src = {item.photos[0].alt_sizes[1].url}  
                             summary = {item.summary}
                             postUrl = {item.post_url}
@@ -33,8 +34,7 @@ var SearchContainer = React.createClass({
             
         })
         return(
-            
-           
+        
             <div className="search-cards-flex">
              <Link to= {'/savedposts'}>
                     <button type="button" onClick={this.onClick} className="btn btn-default">Saved Posts</button>
@@ -44,9 +44,8 @@ var SearchContainer = React.createClass({
                         <input type="text" className="form-control" ref='input'  placeholder=" Search for gif, Bill Murray, Batman, Smithsonian..."/>
                     </form>
                 </div>
-                
                 {tumblrResults}
-            </div>    
+            </div>
         )
     }
 })

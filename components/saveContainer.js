@@ -18,7 +18,8 @@ var SaveContainer = React.createClass({
         dbResults = this.props.dbData.map(function(item, id){
             itemId = item._id;
                 return (
-                    <SaveCard blogName = {item.blogName}
+                    <SaveCard key={id}
+                            blogName = {item.blogName}
                             src = {item.src}  
                             summary = {item.summary}
                             postUrl = {item.postUrl}
@@ -26,6 +27,12 @@ var SaveContainer = React.createClass({
                 )
      })
         return(
+        <div>
+            {this.props.dbLoading ? 
+            <div className="loader">
+                <i className="fa fa-refresh fa-spin fa-5x fa-fw"></i>
+                <span className="sr-only">Loading</span>
+            </div>:
             <div>
                 <div className="text-align-center">
                      <Link to= {'/'}>
@@ -34,8 +41,9 @@ var SaveContainer = React.createClass({
                 </div>
                 <div className="save-cards-flex">
                     {dbResults}
-                </div>   
-            </div>
+                </div>
+            </div>}
+        </div>
         )
     }
 })

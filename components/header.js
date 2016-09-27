@@ -14,7 +14,7 @@ var Header = React.createClass({
         return(
             <div>
                 <div className="text-align-center">
-                    <h2>Tumblr Tags</h2><span>Search for images on tumblr by tag. Save them for others to see.</span>
+                    <h2>Tumblr Tags</h2><span>Search for images on Tumblr by tag. Save them for others to see.</span>
                 </div>
                 <div>
                     {this.props.children}

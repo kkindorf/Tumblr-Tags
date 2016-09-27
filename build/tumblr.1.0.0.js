@@ -21488,7 +21488,7 @@
 	                React.createElement(
 	                    'span',
 	                    null,
-	                    'Search for images on tumblr by tag. Save them for others to see.'
+	                    'Search for images on Tumblr by tag. Save them for others to see.'
 	                )
 	            ),
 	            React.createElement(
@@ -29576,7 +29576,8 @@
 	
 	        dbResults = this.props.dbData.map(function (item, id) {
 	            itemId = item._id;
-	            return React.createElement(SaveCard, { blogName: item.blogName,
+	            return React.createElement(SaveCard, { key: id,
+	                blogName: item.blogName,
 	                src: item.src,
 	                summary: item.summary,
 	                postUrl: item.postUrl,
@@ -29585,23 +29586,36 @@
 	        return React.createElement(
 	            'div',
 	            null,
-	            React.createElement(
+	            this.props.dbLoading ? React.createElement(
 	                'div',
-	                { className: 'text-align-center' },
+	                { className: 'loader' },
+	                React.createElement('i', { className: 'fa fa-refresh fa-spin fa-5x fa-fw' }),
 	                React.createElement(
-	                    Link,
-	                    { to: '/' },
-	                    React.createElement(
-	                        'button',
-	                        { className: 'btn btn-default', role: 'button' },
-	                        'Previous Search'
-	                    )
+	                    'span',
+	                    { className: 'sr-only' },
+	                    'Loading'
 	                )
-	            ),
-	            React.createElement(
+	            ) : React.createElement(
 	                'div',
-	                { className: 'save-cards-flex' },
-	                dbResults
+	                null,
+	                React.createElement(
+	                    'div',
+	                    { className: 'text-align-center' },
+	                    React.createElement(
+	                        Link,
+	                        { to: '/' },
+	                        React.createElement(
+	                            'button',
+	                            { className: 'btn btn-default', role: 'button' },
+	                            'Previous Search'
+	                        )
+	                    )
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: 'save-cards-flex' },
+	                    dbResults
+	                )
 	            )
 	        );
 	    }
@@ -29706,7 +29720,8 @@
 	            if (!item.photos) {
 	                return;
 	            } else {
-	                return React.createElement(SearchCard, { blogName: item.blog_name,
+	                return React.createElement(SearchCard, { key: id,
+	                    blogName: item.blog_name,
 	                    src: item.photos[0].alt_sizes[1].url,
 	                    summary: item.summary,
 	                    postUrl: item.post_url

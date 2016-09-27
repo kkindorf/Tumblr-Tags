@@ -35,7 +35,17 @@
     justify-content: center;
     align-items:center;
 }
-
+.loader{
+  bottom: 0;
+  height: 100px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  color: black;
+}
 .save-cards-flex{
     display: flex;
     flex-direction: row;
