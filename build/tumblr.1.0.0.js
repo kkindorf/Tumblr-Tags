@@ -29573,7 +29573,6 @@
 	    },
 	
 	    render: function render() {
-	
 	        dbResults = this.props.dbData.map(function (item, id) {
 	            itemId = item._id;
 	            return React.createElement(SaveCard, { key: id,
@@ -29586,36 +29585,23 @@
 	        return React.createElement(
 	            'div',
 	            null,
-	            this.props.dbLoading ? React.createElement(
+	            React.createElement(
 	                'div',
-	                { className: 'loader' },
-	                React.createElement('i', { className: 'fa fa-refresh fa-spin fa-5x fa-fw' }),
+	                { className: 'text-align-center' },
 	                React.createElement(
-	                    'span',
-	                    { className: 'sr-only' },
-	                    'Loading'
-	                )
-	            ) : React.createElement(
-	                'div',
-	                null,
-	                React.createElement(
-	                    'div',
-	                    { className: 'text-align-center' },
+	                    Link,
+	                    { to: '/' },
 	                    React.createElement(
-	                        Link,
-	                        { to: '/' },
-	                        React.createElement(
-	                            'button',
-	                            { className: 'btn btn-default', role: 'button' },
-	                            'Previous Search'
-	                        )
+	                        'button',
+	                        { className: 'btn btn-default', role: 'button' },
+	                        'Previous Search'
 	                    )
-	                ),
-	                React.createElement(
-	                    'div',
-	                    { className: 'save-cards-flex' },
-	                    dbResults
 	                )
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: 'save-cards-flex' },
+	                dbResults
 	            )
 	        );
 	    }
