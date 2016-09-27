@@ -12,10 +12,9 @@
 .col-xs-12{
     padding-right: 10%;
     padding-left: 10%;
-    padding-top: 3%;
-    padding-bottom: 3%
+    padding-top: 20px;
+    padding-bottom: 40px;
 }
-
 .btn{
     padding: 10px 25px;
 }
@@ -54,7 +53,7 @@
 }
 .card{
     max-width: 400px;
-    padding: 2%;
+    padding: 15px;
 }
 
 .save-card{
