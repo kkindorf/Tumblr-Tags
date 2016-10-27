@@ -46,22 +46,24 @@ body { padding-top: 70px;
     padding: 15px;
     background: white;
     margin-bottom: 30px;
+    text-align:center;
 
 }
 .my-fancy-container {
   display: inline-block;
   margin-right: 3px;
   margin-left:4px;
+ 
 }
 .my-icon{
-    vertical-align: middle;
+     padding-left: 12px;
     
 }
+
 .my-text{
-    
-    vertical-align: middle;
     padding-top:10px;
-    padding-left:4.5px;
+    margin-right:9px;
+
 }
 .fa-font,
 .fa-quote-right,
