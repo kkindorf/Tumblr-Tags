@@ -51,28 +51,20 @@ body { padding-top: 70px;
 }
 .my-fancy-container {
   display: inline-block;
-  margin-right: 3px;
+  margin-right: 20px;
   margin-left:4px;
  
 }
 .my-icon{
-     padding-left: 12px;
+     padding-left: 8px;
     
 }
 
 .my-text{
     padding-top:10px;
-    margin-right:9px;
 
 }
-.fa-font,
-.fa-quote-right,
-.fa-link,
-.fa-users,
-.fa-headphones,
-.fa-camera-retro{
-    margin-right: 20px;
-}
+
 .fa-camera-retro{
     color: #ff9966;
 }
