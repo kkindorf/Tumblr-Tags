@@ -13,8 +13,7 @@ var connect = require('react-redux').connect;
 
 var routes = (
              <Router history= {hashHistory}>
-              <Route path = '/' component={SaveContainer}>
-              </Route>
+                <Route path = '/' component={SaveContainer}></Route>
              </Router>
              )
              

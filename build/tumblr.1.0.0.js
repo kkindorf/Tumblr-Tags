@@ -21461,9 +21461,8 @@
 	var actions = __webpack_require__(174);
 	var connect = __webpack_require__(177).connect;
 	var Link = router.Link;
-	var dbResults = [];
+	var results = [];
 	var itemId = '';
-	var aitem = '';
 	var submitted = false;
 	var SaveContainer = React.createClass({
 	    displayName: 'SaveContainer',
@@ -21473,7 +21472,7 @@
 	    },
 	    onSubmit: function onSubmit(e) {
 	        submitted = true;
-	        dbResults = [];
+	        results = [];
 	        e.preventDefault();
 	        var query = this.refs.input.value;
 	        this.props.dispatch(actions.fetchTumblrData(query));
@@ -21482,7 +21481,7 @@
 	
 	    render: function render() {
 	        if (!submitted) {
-	            dbResults = this.props.dbData.map(function (item, id) {
+	            results = this.props.dbData.map(function (item, id) {
 	                itemId = item._id;
 	                return React.createElement(SaveCard, { key: id,
 	                    blogName: item.blogName,
@@ -21493,7 +21492,7 @@
 	            });
 	        } else {
 	            submitted = true;
-	            dbResults = this.props.tumblrDataResponse.map(function (item, id) {
+	            results = this.props.tumblrDataResponse.map(function (item, id) {
 	                if (!item.photos) {
 	                    return;
 	                } else {
@@ -21501,9 +21500,7 @@
 	                        blogName: item.blog_name,
 	                        src: item.photos[0].original_size.url,
 	                        summary: item.summary,
-	                        postUrl: item.post_url
-	
-	                    });
+	                        postUrl: item.post_url });
 	                }
 	            });
 	        }
@@ -21671,7 +21668,7 @@
 	                            )
 	                        )
 	                    ),
-	                    dbResults
+	                    results
 	                )
 	            )
 	        );

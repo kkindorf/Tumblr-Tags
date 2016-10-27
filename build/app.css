@@ -1,16 +1,17 @@
 
-body { padding-top: 70px;
-       background: #484AB8;
-       color: #555;
+body {
+    padding-top: 70px;
+    background: #484AB8;
+    color: #555;
 }
 .navbar-inverse{
     background: #484AB8;
-    border-bottom: .5px solid #F8F8F8;
+    border-bottom: 1px solid #F8F8F8;
     color: #F8F8F8;
 
 }
 .navbar-inverse a{
-    color:#F8F8F8 !important;
+    color: #F8F8F8 !important;
 }
 .navbar-header{
     padding-top: 5px;
@@ -19,7 +20,7 @@ body { padding-top: 70px;
     padding-top: 5px;
 }
 .navbar-text{
-    float:right;
+    float: right;
 }
 .fa:hover{
     cursor: pointer;
@@ -46,13 +47,13 @@ body { padding-top: 70px;
     padding: 15px;
     background: white;
     margin-bottom: 30px;
-    text-align:center;
+    text-align: center;
 
 }
 .my-fancy-container {
-  display: inline-block;
-  margin-right: 20px;
-  margin-left:4px;
+    display: inline-block;
+    margin-right: 20px;
+    margin-left: 4px;
  
 }
 .my-icon{
@@ -61,7 +62,7 @@ body { padding-top: 70px;
 }
 
 .my-text{
-    padding-top:10px;
+    padding-top: 10px;
 
 }
 
@@ -84,15 +85,15 @@ body { padding-top: 70px;
     color:  #66A370;
 }
 .loader{
-  bottom: 0;
-  height: 100px;
-  left: 0;
-  margin: auto;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100px;
-  color: white;
+    bottom: 0;
+    height: 100px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    color: white;
 }
 
 .cards{
@@ -119,7 +120,7 @@ img{
     width: 100%;
 }
 .card-block{
-    width:100%;
+    width: 100%;
     padding: 10px;
 }
 

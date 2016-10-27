@@ -28,10 +28,10 @@ var SearchCard = React.createClass({
             
            <div className="card">
               <p className="card-header">{this.props.blogName}</p>
-             <a href={this.props.postUrl}><img className="card-img-top" src={this.props.src} alt="Card image cap"/></a>
-             <div className="card-block">
-               <p className="card-text">{this.props.summary}<i onClick={this.saved} className={this.state.color} aria-hidden="true" ></i></p>
-             </div>
+              <a href={this.props.postUrl}><img className="card-img-top" src={this.props.src} alt="Card image cap"/></a>
+              <div className="card-block">
+                <p className="card-text">{this.props.summary}<i onClick={this.saved} className={this.state.color} aria-hidden="true" ></i></p>
+              </div>
            </div>
            
         );
