@@ -1,8 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Header = require('./components/header').Header;
 var SaveContainer = require('./components/saveContainer').ASaveContainer;
-var SearchContainer = require('./components/searchContainer').ASearchContainer;
 var router = require('react-router');
 var Router = router.Router;
 var Route = router.Route;
@@ -15,9 +13,7 @@ var connect = require('react-redux').connect;
 
 var routes = (
              <Router history= {hashHistory}>
-              <Route path = '/' component={Header}>
-                <IndexRoute component={SearchContainer}/>
-                <Route path = '/savedposts' component = {SaveContainer}/>
+              <Route path = '/' component={SaveContainer}>
               </Route>
              </Router>
              )

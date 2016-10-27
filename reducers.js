@@ -3,14 +3,19 @@ var actions = require('./actions');
 var initialAppState = {
 	tumblrDataResponse: [],
 	postedData: {},
-	dbData: []
+	dbData: [],
+	loadingdb: true,
+	loadingTumblr: true
     
 }
 
 var appReducer = function(state, action){
      state = state || initialAppState;
      if(action.type === actions.FETCH_TUMBLR_SUCCESS){
-         var updatedTumblrDataResponse = Object.assign({}, state, {tumblrDataResponse: action.tumblrDataResponse })
+         var updatedTumblrDataResponse = Object.assign({}, state, {tumblrDataResponse: action.tumblrDataResponse,
+                                                                   loadingTumblr: false
+              
+                                                                    })
          return updatedTumblrDataResponse;
      }
      if(action.type === actions.FETCH_TUMBLR_ERROR){
@@ -24,7 +29,7 @@ var appReducer = function(state, action){
           throw new Error('the data from the database could not be posted', action.error)
      }
      if(action.type === actions.FETCH_POSTS_FROM_DB_SUCCESS){
-          var updatedDbData = Object.assign({}, state, {dbData: action.dbData});
+          var updatedDbData = Object.assign({}, state, {dbData: action.dbData, loadingdb: false});
           return updatedDbData;
      }
      if(action.type === actions.FETCH_POSTS_FROM_DB_ERROR){

@@ -64,6 +64,8 @@ var deleteCardFromDbError = function(error){
     error: error
     }
 }
+
+
 var rootUrl = 'https://serene-ridge-74209.herokuapp.com';
 var fetchTumblrData = function(query){
     return function(dispatch){

@@ -17,10 +17,11 @@ var SaveCard = React.createClass({
     render: function(){
         return(
             <div className= {this.state.hide} >
+            <p className="card-header">{this.props.blogName}</p>
              <a href={this.props.postUrl}><img className="card-img-top" src={this.props.src} alt="Card image cap"/></a>
              <div className="card-block">
-               <h4 className="card-title">{this.props.blogName}<i className="fa fa-trash pull-right" aria-hidden="true" onClick={this.deleted}></i></h4>
-               <p className="card-text">{this.props.summary}</p>
+              
+               <p className="card-text">{this.props.summary}<i className="fa fa-trash pull-right" aria-hidden="true" onClick={this.deleted}></i></p>
                <p className="display-none">{this.props.id}</p>
              </div>
            </div>
