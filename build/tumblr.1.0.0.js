@@ -21535,15 +21535,6 @@
 	                            )
 	                        ),
 	                        React.createElement(
-	                            'form',
-	                            { className: 'navbar-form navbar-left', onSubmit: this.onSubmit },
-	                            React.createElement(
-	                                'div',
-	                                { className: 'form-group' },
-	                                React.createElement('input', { type: 'text', ref: 'input', className: 'form-control', id: 'form', placeholder: 'Search' })
-	                            )
-	                        ),
-	                        React.createElement(
 	                            'span',
 	                            { className: 'navbar-text text-muted' },
 	                            React.createElement('i', { className: 'fa fa-home fa-2x', 'aria-hidden': 'true' }),
@@ -21559,6 +21550,15 @@
 	                            React.createElement('i', { className: 'fa fa-user fa-2x', 'aria-hidden': 'true' }),
 	                            ' ',
 	                            React.createElement('i', { className: 'fa fa-pencil-square fa-2x', 'aria-hidden': 'true' })
+	                        ),
+	                        React.createElement(
+	                            'form',
+	                            { className: 'navbar-form navbar-left', onSubmit: this.onSubmit },
+	                            React.createElement(
+	                                'div',
+	                                { className: 'form-group' },
+	                                React.createElement('input', { type: 'text', ref: 'input', className: 'form-control', id: 'form', placeholder: 'Search' })
+	                            )
 	                        )
 	                    )
 	                ),

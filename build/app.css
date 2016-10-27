@@ -43,18 +43,21 @@ body {
     color: yellow;
 }
 .actions{
-    max-width: 499px;
     padding: 15px;
     background: white;
     margin-bottom: 30px;
     text-align: center;
+    border-radius: 6px 6px 6px 6px;
+    -moz-border-radius: 6px 6px 6px 6px;
+    -webkit-border-radius: 6px 6px 6px 6px;
+    border: 0px solid #000000;
+    background: #F8F8F8;
 
 }
 .my-fancy-container {
     display: inline-block;
     margin-right: 20px;
     margin-left: 4px;
- 
 }
 .my-icon{
      padding-left: 8px;
@@ -98,23 +101,25 @@ body {
 
 .cards{
     margin: auto;
-    max-width: 700px;
+    max-width: 520px;
     padding: 10px;
-    margin-top: 60px;
+    margin-top: 15px;
+
 }
 .card{
-    max-width: 500px;
     margin-bottom: 30px;
-    border: 1px solid black;
     background: #F8F8F8;
+    border-radius: 6px 6px 6px 6px;
+    -moz-border-radius: 6px 6px 6px 6px;
+    -webkit-border-radius: 6px 6px 6px 6px;
+    border: 0px solid #000000;
 
 }
 .card-header{
     padding-left: 10px;
-    padding-top: 5px;
+    padding-top: 8px;
     padding-bottom: 5px;
     font-size: 1.2em;
-    font-weight: bold;
 }
 img{
     width: 100%;
@@ -134,5 +139,42 @@ img{
 .display-none{
     display: none;
     
+}
+
+@media only screen and (max-width: 500px) {
+    body{
+        padding-top: 100px;
+    }
+    .navbar-text{
+        float: none;
+    }
+    .fa-home,
+    .fa-compass,
+    .fa-envelope,
+    .fa-comment-o,
+    .fa-bolt,
+    .fa-user,
+    .fa-pencil-square{
+        margin-right: 0;
+        margin-left: 15px;
+    }
+    .actions{
+        padding: 5px;
+        background: white;
+        margin-bottom: 15px;
+
+    }
+    .navbar-header {
+        padding-top: 3px; 
+    }
+    .navbar-form {
+        padding: 10px 15px;
+        margin-top: 5px;
+        margin-right: -15px;
+        margin-bottom: 5px;
+        margin-left: -15px;
+        border-top: 1px solid #484AB8 !important;
+        border-bottom: 1px solid #484AB8 !important;
+    }
 }
 
