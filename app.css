@@ -1,38 +1,93 @@
 
-.padding-bottom{
-    padding-bottom: 10%;
+body { padding-top: 70px;
+       background: #484AB8;
+       color: #555;
 }
-* {
-  border-radius: 0 !important;
+.navbar-inverse{
+    background: #484AB8;
+    border-bottom: .5px solid #F8F8F8;
+    color: #F8F8F8;
+
 }
-.text-align-center{
-    text-align: center;
-    padding: 2%;
+.navbar-inverse a{
+    color:#F8F8F8 !important;
 }
-.col-xs-12{
-    padding-right: 10%;
-    padding-left: 10%;
-    padding-top: 20px;
-    padding-bottom: 40px;
+.navbar-header{
+    padding-top: 5px;
 }
-.btn{
-    padding: 10px 25px;
+.navbar-form{
+    padding-top: 5px;
 }
-.btn-default{
-    background: #9370DB;
-    color: #FFFFF0;
-    border-color: #9370DB;
+.navbar-text{
+    float:right;
 }
-.btn-default:hover {
-    background: #9370DB;
-    color:#FFFFF0;
-    border-color: #9370DB;
+.fa:hover{
+    cursor: pointer;
 }
-.search-cards-flex{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items:center;
+.fa-home,
+.fa-compass,
+.fa-envelope,
+.fa-comment-o,
+.fa-bolt,
+.fa-user,
+.fa-pencil-square{
+    margin-left: 23px;
+}
+
+.fa-home{
+    color: white;
+}
+
+.fa-pencil-square {
+    color: yellow;
+}
+.actions{
+    max-width: 499px;
+    padding: 15px;
+    background: white;
+    margin-bottom: 30px;
+
+}
+.my-fancy-container {
+  display: inline-block;
+  margin-right: 3px;
+  margin-left:4px;
+}
+.my-icon{
+    vertical-align: middle;
+    
+}
+.my-text{
+    
+    vertical-align: middle;
+    padding-top:10px;
+    padding-left:4.5px;
+}
+.fa-font,
+.fa-quote-right,
+.fa-link,
+.fa-users,
+.fa-headphones,
+.fa-camera-retro{
+    margin-right: 20px;
+}
+.fa-camera-retro{
+    color: #ff9966;
+}
+.fa-headphones{
+    color: #47d147;
+}
+.fa-users{
+    color: #cc9900;
+}
+.fa-link{
+    color: #0066cc;
+}
+.fa-quote-right{
+    color: #B8B8B8;
+}
+.fa-video-camera{
+    color:  #66A370;
 }
 .loader{
   bottom: 0;
@@ -43,53 +98,46 @@
   top: 0;
   right: 0;
   width: 100px;
-  color: black;
-}
-.save-cards-flex{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-.card{
-    max-width: 400px;
-    padding: 15px;
+  color: white;
 }
 
-.save-card{
-    margin: 2% !important;
-    padding: 2% !important;
-    max-width: 250px !important; 
+.cards{
+    margin: auto;
+    max-width: 700px;
+    padding: 10px;
+    margin-top: 60px;
+}
+.card{
+    max-width: 500px;
+    margin-bottom: 30px;
+    border: 1px solid black;
+    background: #F8F8F8;
+
+}
+.card-header{
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 1.2em;
+    font-weight: bold;
 }
 img{
     width: 100%;
-
 }
 .card-block{
     width:100%;
-}
-.fa{
-    padding-left: 10%
-}
-.card-text{
-    width: 80% !important;
+    padding: 10px;
 }
 
+
 .black {
-    color: black;
+    color: #555;
 }
 .red{
     color: red;
 }
 .display-none{
     display: none;
-}
-@media screen and (max-width:480px) {
- 
-    .card{
-    max-width: 300px;
-    padding: 3%;
+    
 }
 
-   
-}
