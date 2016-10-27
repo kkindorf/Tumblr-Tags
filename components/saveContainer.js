@@ -9,6 +9,7 @@ var connect = require('react-redux').connect;
 var Link = router.Link;
 var dbResults = [];
 var itemId = '';
+var aitem = '';
 var submitted = false;
 var SaveContainer = React.createClass({
     componentDidMount: function(){
