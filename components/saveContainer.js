@@ -69,7 +69,7 @@ var SaveContainer = React.createClass({
                                 <a className="navbar-brand" href="/">Tumblr Tags</a>
                             </div>
                             <span className="navbar-text text-muted">
-                                <i className="fa fa-home fa-2x" aria-hidden="true"></i> <i className="fa fa-compass fa-2x" aria-hidden="true"></i> <i className="fa fa-envelope fa-2x" aria-hidden="true"></i> <i className="fa fa-comment-o fa-2x" aria-hidden="true"></i> <i className="fa fa-bolt fa-2x" aria-hidden="true"></i> <i className="fa fa-user fa-2x" aria-hidden="true"></i> <i className="fa fa-pencil-square fa-2x" aria-hidden="true"></i>
+                                <a href="/"><i className="fa fa-home fa-2x" aria-hidden="true"></i></a> <i className="fa fa-compass fa-2x" aria-hidden="true"></i> <i className="fa fa-envelope fa-2x" aria-hidden="true"></i> <i className="fa fa-comment-o fa-2x" aria-hidden="true"></i> <i className="fa fa-bolt fa-2x" aria-hidden="true"></i> <i className="fa fa-user fa-2x" aria-hidden="true"></i> <i className="fa fa-pencil-square fa-2x" aria-hidden="true"></i>
                             </span>
                             <form className="navbar-form navbar-left" onSubmit={this.onSubmit}>
                                 <div className="form-group">

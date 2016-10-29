@@ -14,6 +14,7 @@ body {
 }
 .navbar-header{
     padding-top: 5px;
+    font-family: 'Lora', serif;
 }
 .navbar-form{
     padding-top: 5px;
@@ -24,7 +25,7 @@ body {
 .fa:hover{
     cursor: pointer;
 }
-.fa-home,
+
 .fa-compass,
 .fa-envelope,
 .fa-comment-o,
@@ -36,6 +37,7 @@ body {
 
 .fa-home{
     color: white;
+    margin-left: 0;
 }
 
 .fa-pencil-square {
@@ -43,7 +45,6 @@ body {
 }
 .actions{
     padding: 15px;
-    background: white;
     margin-bottom: 30px;
     text-align: center;
     border-radius: 6px 6px 6px 6px;
@@ -136,6 +137,11 @@ img{
     padding: 10px;
 }
 
+.fa-heart,
+.fa-trash{
+    font-size: 1.2em;
+    padding:2px;
+}
 
 .black {
     color: #555;
@@ -150,9 +156,8 @@ img{
 
 @media only screen and (max-width: 750px) {
     .navbar-text{
-        float: none;
+        float: left;
     }
-    .fa-home,
     .fa-compass,
     .fa-envelope,
     .fa-comment-o,
@@ -162,14 +167,7 @@ img{
         margin-right: 0;
         margin-left: 10px;
     }
-    .actions{
-        background: white;
-
-    }
-    .my-fancy-container {
-    display: inline-block;
-
-    }
+    
 
     .navbar-header {
         padding-top: 3px; 

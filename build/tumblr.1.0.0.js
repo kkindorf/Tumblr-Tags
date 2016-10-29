@@ -21537,7 +21537,11 @@
 	                        React.createElement(
 	                            'span',
 	                            { className: 'navbar-text text-muted' },
-	                            React.createElement('i', { className: 'fa fa-home fa-2x', 'aria-hidden': 'true' }),
+	                            React.createElement(
+	                                'a',
+	                                { href: '/' },
+	                                React.createElement('i', { className: 'fa fa-home fa-2x', 'aria-hidden': 'true' })
+	                            ),
 	                            ' ',
 	                            React.createElement('i', { className: 'fa fa-compass fa-2x', 'aria-hidden': 'true' }),
 	                            ' ',
