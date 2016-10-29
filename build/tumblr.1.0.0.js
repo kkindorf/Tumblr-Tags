@@ -21521,7 +21521,7 @@
 	                null,
 	                React.createElement(
 	                    'nav',
-	                    { className: 'navbar navbar-default navbar-fixed-top navbar-inverse' },
+	                    { className: 'navbar navbar-default navbar-inverse' },
 	                    React.createElement(
 	                        'div',
 	                        { className: 'container-fluid' },

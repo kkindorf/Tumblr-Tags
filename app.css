@@ -1,6 +1,5 @@
 
 body {
-    padding-top: 70px;
     background: #484AB8;
     color: #555;
 }
@@ -68,7 +67,15 @@ body {
     padding-top: 10px;
 
 }
-
+.fa-camera-retro,
+.fa-headphones,
+.fa-users,
+.fa-link,
+.fa-quote-right,
+.fa-video-camera,
+.fa-font{
+    font-size: 40px;
+}
 .fa-camera-retro{
     color: #ff9966;
 }
@@ -141,10 +148,7 @@ img{
     
 }
 
-@media only screen and (max-width: 500px) {
-    body{
-        padding-top: 100px;
-    }
+@media only screen and (max-width: 750px) {
     .navbar-text{
         float: none;
     }
@@ -156,25 +160,30 @@ img{
     .fa-user,
     .fa-pencil-square{
         margin-right: 0;
-        margin-left: 15px;
+        margin-left: 10px;
     }
     .actions{
-        padding: 5px;
         background: white;
-        margin-bottom: 15px;
 
     }
+    .my-fancy-container {
+    display: inline-block;
+
+    }
+
     .navbar-header {
         padding-top: 3px; 
     }
     .navbar-form {
         padding: 10px 15px;
-        margin-top: 5px;
-        margin-right: -15px;
-        margin-bottom: 5px;
         margin-left: -15px;
         border-top: 1px solid #484AB8 !important;
         border-bottom: 1px solid #484AB8 !important;
     }
 }
+@media only screen and (max-width: 415px){
+    .actions{
+        display: none;
 
+    }
+}
