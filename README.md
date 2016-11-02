@@ -4,10 +4,8 @@ A search app built with React, Redux, Express and Bootstrap.
 
 ## Overview
 
-FOr this application I'm pulling in data from the Tumblr API based a query submitted by the user. The result will be a list of 
-Tumblr posts that have tags that match the submitted query string. Users will then be able to click a button that saves the item to the
-database. The user will also have an option to select a button that will render the saveContainer and display all of the cards saved
-within the savedContainer. 
+For this application, I'm pulling in data from the Tumblr API based on a query submitted by the user. The result will be a list of 
+Tumblr posts that have tags that match the submitted query string. I'm using the tags API from Tumblr and the result page will only return 10 items max from the search query which was unfortunate but still makes the app fun to use. Users will then be able to click a button that saves the item to the database on the card of the image the liked. When the application first loads, the images from the database will be displayed. I wanted to make this application seem similar to a user's homepage on Tumblr's actual website. Mostly because I wanted the challeng of designing that particular part of the application. When a user enter's a search query the search results will take the place of the saved cards. Unfortunately, since I am using the Tags API from Tumblr, only 10 results max will be returned for a given search query. Tumblr had other ways to query their data, but the Tags API made the most sense for my application because I wanted to pull in broad results for a search term entered by the user.
 
 API Documentation
 The application is actually two applications. I'm using a second server which is hosted on Heroku to complete all 
@@ -27,23 +25,11 @@ postUrl: "http://hello-cat-hug.tumblr.com/post/150935286701/bublog-hey-bub-have-
 __v: 0
 }
 ```
-I'm returning the src of the image for displaying the image the blog name of the user, the post's summary and the url to the actual post on Tumblr.
-
-I decided to make the images in the searchContainer rather large since the main point of the application for that particular component is
-to make it easy for users to see the images and the information in the summery and blogname. I chose to make the saveContainer images smaller
-mostly because it made sense to have each image displayed in a way so people could see as many of the items being saved at once. I plan on 
-adding a feature to this application where if a user clicks on an image in the saveContainer, they'll be brought to that specific image in larger
-format and they'll be able to see comments by users about that image.
+I'm returning the src of the image for displaying the image, the blog name of the user, the post's summary and the url to the actual post on Tumblr.
 
 ##Screenshots
 
-![alt tag](http://i.imgur.com/fvyfVR3.png)
-This is a screenshot of the saveContainer for the application. As you can see I'm displaying the images in rows using flexbos for centering and 
-creating space between each image. 
-
-![alt tag](http://i.imgur.com/sD83ohg.png)
-This is a screenshot of the application inside the searchContainer component. The images are slightly larger so I had to zoom out to get
-a decent shot of what is going on in the component. I'm using flexbox for this as well but instead of using rows I'm putting everything
-into a single centered column. 
+![alt tag]http://i.imgur.com/9vT9nGw.png)
+This is a screenshot of the saveContainer for the application when the data is first loaded from the database. 
 
  
