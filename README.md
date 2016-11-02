@@ -29,7 +29,7 @@ I'm returning the src of the image for displaying the image, the blog name of th
 
 ##Screenshots
 
-![alt tag]http://i.imgur.com/9vT9nGw.png)
+![alt tag](http://i.imgur.com/9vT9nGw.png)
 This is a screenshot of the saveContainer for the application when the data is first loaded from the database. 
 
  
