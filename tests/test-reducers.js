@@ -10,6 +10,8 @@ describe('app reducer', function(){
         expect(appReducer(undefined, {})).toEqual({
             tumblrDataResponse: [],
         	postedData: {},
+        	loadingdb: true,
+        	loadingTumblr: true,
 	        dbData: []
         })
    
@@ -19,7 +21,8 @@ describe('app reducer', function(){
            type: actions.FETCH_TUMBLR_SUCCESS,
            tumblrDataResponse: []
         })).toEqual({
-	        tumblrDataResponse: []
+	        tumblrDataResponse: [],
+	        loadingTumblr: false
         })
     })
     it('should post data to the database', function(){
@@ -68,7 +71,8 @@ describe('app reducer', function(){
                 blogName: 'this is a blogName 2',
                 postUrl: 'this is a postUrl 2',
                 summary: 'this is a summary 2'
-            }]
+            }],
+            loadingdb: false
         })
     })
 })

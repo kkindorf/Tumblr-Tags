@@ -13,14 +13,15 @@ describe('saveContainer component', function(){
          renderer.render(<SaveContainer dbData = {results} />);
          var result = renderer.getRenderOutput();
          result.type.should.equal('div');
-         result.props.children[0].type.should.equal('div');
-         result.props.children[0].props.className.should.equal('text-align-center')
-         var Link = result.props.children[0].props.children;
-         Link.props.to.should.equal('/');
-         Link.props.children.type.should.equal('button');
-         result.props.children[1].type.should.equal('div');
-         result.props.children[1].props.className.should.equal('save-cards-flex');
-         var saveCard = result.props.children[1].props.children[0];
+         result.props.children.type.should.equal('div');
+         var div = result.props.children;
+         var nav = div.props.children[0];
+         nav.type.should.equal('nav');
+         nav.props.className.should.equal('navbar navbar-default navbar-inverse');
+         nav.props.children.type.should.equal('div');
+         var cards = div.props.children[1];
+         cards.type.should.equal('div');
+         cards.props.className.should.equal('cards');
 
     })
 })
